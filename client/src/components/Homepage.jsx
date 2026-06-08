@@ -85,6 +85,22 @@ export default function Homepage({ onLaunchTerminal }) {
     if (window.location.pathname !== targetPath) {
       window.history.pushState({ tab: currentTab }, '', targetPath);
     }
+
+    // Dynamic browser tab title update
+    if (currentTab === 'home') {
+      document.title = "Aegis Professional Services";
+    } else if (currentTab === 'insights') {
+      document.title = "Aegis Insights | Bloomberg Professional Services";
+    } else if (currentTab === 'aegis-terminal' || currentTab === 'terminal-overview') {
+      document.title = "Bloomberg Terminal | Bloomberg Professional Services";
+    } else {
+      const config = SUBPAGES_CONFIG[currentTab];
+      if (config && config.title) {
+        document.title = `${config.title} | Bloomberg Professional Services`;
+      } else {
+        document.title = "Bloomberg Professional Services";
+      }
+    }
   }, [currentTab]);
 
   // Insights Page States
@@ -894,7 +910,7 @@ export default function Homepage({ onLaunchTerminal }) {
       )}
 
       {/* FOOTER: PLAIN DARK THEME OR WHITE BLOOMBERG FOOTER */}
-      {currentTab === 'aegis-terminal' || currentTab === 'terminal-overview' ? (
+      {currentTab !== 'home' && currentTab !== 'insights' ? (
         <BloombergWhiteFooter onLaunchTerminal={onLaunchTerminal} />
       ) : (
         <footer style={{ backgroundColor: '#000000', color: '#ffffff', padding: '60px 0', fontSize: '12px', borderTop: '1px solid #222' }} onClick={() => setActiveMenu(null)}>
@@ -2099,6 +2115,316 @@ function DualMonitorSvg() {
   );
 }
 
+function ClinicalDualMonitorSvg({ widgetType, title }) {
+  const renderLeftScreen = () => {
+    switch (widgetType) {
+      case 'vitals-streamer':
+      case 'ai-medical-assist':
+        return (
+          <>
+            <text x="80" y="68" fill="#ffb000" fontSize="8" fontFamily="monospace" fontWeight="bold">DASH &lt;GO&gt; - VITAL TELEMETRY STREAM</text>
+            <text x="250" y="68" fill="#00ff66" fontSize="8" fontFamily="monospace" fontWeight="bold">PATIENT: 4-B</text>
+            <path d="M 70 180 L 100 180 L 105 140 L 110 220 L 115 180 L 160 180 L 165 140 L 170 220 L 175 180 L 220 180 L 225 140 L 230 220 L 235 180 L 280 180 L 285 140 L 290 220 L 295 180 L 340 180 L 345 140 L 350 220 L 355 180 L 380 180" fill="none" stroke="#00ff66" strokeWidth="2" />
+            <path d="M 70 120 L 120 115 L 170 125 L 220 110 L 270 118 L 320 108 L 380 115" fill="none" stroke="#ffb000" strokeWidth="1.5" />
+            <text x="80" y="245" fill="#aaa" fontSize="7" fontFamily="monospace">Telemetry Channel: Bedside ECG & SpO2</text>
+          </>
+        );
+      case 'outbreak-monitor':
+      case 'alert-surveillance':
+        return (
+          <>
+            <text x="80" y="68" fill="#ff3b30" fontSize="8" fontFamily="monospace" fontWeight="bold">MAP &lt;GO&gt; - REGIONAL OUTBREAK DETECTOR</text>
+            <text x="250" y="68" fill="#ff3b30" fontSize="8" fontFamily="monospace" fontWeight="bold">HAZARD: LEVEL 3</text>
+            <circle cx="150" cy="140" r="30" fill="rgba(255,59,48,0.15)" stroke="#ff3b30" strokeWidth="1" strokeDasharray="3 3" />
+            <circle cx="150" cy="140" r="4" fill="#ff3b30" />
+            <circle cx="280" cy="170" r="40" fill="rgba(255,59,48,0.1)" stroke="#ff3b30" strokeWidth="1" strokeDasharray="3 3" />
+            <circle cx="280" cy="170" r="4" fill="#ff3b30" />
+            <circle cx="200" cy="90" r="20" fill="rgba(0,229,255,0.15)" stroke="#00e5ff" strokeWidth="1" />
+            <circle cx="200" cy="90" r="4" fill="#00e5ff" />
+            <path d="M 70 140 H 380 M 225 50 V 260" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5" />
+            <text x="80" y="245" fill="#aaa" fontSize="7" fontFamily="monospace">Region Grid: US-Northeast  |  Source: CDC Alerts</text>
+          </>
+        );
+      case 'risk-calculator':
+      case 'diagnostic-analytics':
+        return (
+          <>
+            <text x="80" y="68" fill="#00e5ff" fontSize="8" fontFamily="monospace" fontWeight="bold">RISK &lt;GO&gt; - ICU PROGNOSTIC CALCULATOR</text>
+            <text x="250" y="68" fill="#00ff66" fontSize="8" fontFamily="monospace" fontWeight="bold">ACCURACY: 94%</text>
+            <rect x="90" y="100" width="80" height="15" fill="rgba(255,59,48,0.3)" stroke="#ff3b30" strokeWidth="1" />
+            <text x="180" y="111" fill="#fff" fontSize="7" fontFamily="monospace">SEPSIS SCORE: 82% (HIGH)</text>
+            <rect x="90" y="130" width="160" height="15" fill="rgba(0,255,102,0.3)" stroke="#00ff66" strokeWidth="1" />
+            <text x="260" y="141" fill="#fff" fontSize="7" fontFamily="monospace">RESPIRATORY: 45%</text>
+            <rect x="90" y="160" width="110" height="15" fill="rgba(255,176,0,0.3)" stroke="#ffb000" strokeWidth="1" />
+            <text x="210" y="171" fill="#fff" fontSize="7" fontFamily="monospace">CARDIAC RISK: 60%</text>
+            <text x="80" y="245" fill="#aaa" fontSize="7" fontFamily="monospace">Model: Random Forest Ensemble v4.1</text>
+          </>
+        );
+      case 'fda-tracker':
+      case 'regulatory-compliance':
+      case 'clinical-trials':
+        return (
+          <>
+            <text x="80" y="68" fill="#ffb000" fontSize="8" fontFamily="monospace" fontWeight="bold">FDA &lt;GO&gt; - TRIAL & DRUG TRACKER</text>
+            <text x="250" y="68" fill="#00e5ff" fontSize="8" fontFamily="monospace" fontWeight="bold">ACTIVE TRIALS</text>
+            <rect x="90" y="110" width="50" height="25" fill="#00ff66" rx="3" />
+            <text x="100" y="125" fill="#000" fontSize="7" fontFamily="monospace" fontWeight="bold">PHASE I</text>
+            <line x1="140" y1="122" x2="170" y2="122" stroke="#fff" strokeWidth="2" />
+            <rect x="170" y="110" width="50" height="25" fill="#00ff66" rx="3" />
+            <text x="177" y="125" fill="#000" fontSize="7" fontFamily="monospace" fontWeight="bold">PHASE II</text>
+            <line x1="220" y1="122" x2="250" y2="122" stroke="#fff" strokeWidth="2" />
+            <rect x="250" y="110" width="55" height="25" fill="#ffb000" rx="3" />
+            <text x="256" y="125" fill="#000" fontSize="7" fontFamily="monospace" fontWeight="bold">PHASE III</text>
+            <line x1="305" y1="122" x2="330" y2="122" stroke="#555" strokeWidth="1" strokeDasharray="2 2" />
+            <rect x="330" y="110" width="40" height="25" fill="#222" stroke="#555" strokeWidth="1" rx="3" />
+            <text x="338" y="125" fill="#555" fontSize="7" fontFamily="monospace" fontWeight="bold">FILING</text>
+            <text x="90" y="170" fill="#fff" fontSize="8" fontFamily="monospace">Molecule ID: AEGIS-7218 (Oncology Inhibitor)</text>
+            <text x="90" y="185" fill="#00ff66" fontSize="7" fontFamily="monospace">● Trial Phase III Cohort Recruitment Complete (n=1,200)</text>
+            <text x="80" y="245" fill="#aaa" fontSize="7" fontFamily="monospace">Filing Target: Q3 2026  |  Expedited Review Status</text>
+          </>
+        );
+      case 'operations-roi':
+      case 'hospital-systems':
+        return (
+          <>
+            <text x="80" y="68" fill="#ffb000" fontSize="8" fontFamily="monospace" fontWeight="bold">SYS &lt;GO&gt; - HOSPITAL OPERATIONS DASHBOARD</text>
+            <text x="250" y="68" fill="#00ff66" fontSize="8" fontFamily="monospace" fontWeight="bold">ACTIVE SITES</text>
+            <text x="90" y="110" fill="#fff" fontSize="7" fontFamily="monospace">ER BED OCCUPANCY (MAIN BLOCK)</text>
+            <rect x="90" y="115" width="200" height="8" fill="#222" rx="2" />
+            <rect x="90" y="115" width="176" height="8" fill="#ff3b30" rx="2" />
+            <text x="300" y="122" fill="#ff3b30" fontSize="7" fontFamily="monospace" fontWeight="bold">88% (CRITICAL)</text>
+            <text x="90" y="140" fill="#fff" fontSize="7" fontFamily="monospace">ICU VENTILATOR RESERVES</text>
+            <rect x="90" y="145" width="200" height="8" fill="#222" rx="2" />
+            <rect x="90" y="145" width="90" height="8" fill="#00ff66" rx="2" />
+            <text x="300" y="152" fill="#00ff66" fontSize="7" fontFamily="monospace" fontWeight="bold">45% (STABLE)</text>
+            <text x="90" y="170" fill="#fff" fontSize="7" fontFamily="monospace">AVG PATIENT WAITING ADMISSION TIME</text>
+            <text x="90" y="188" fill="#ffb000" fontSize="14" fontFamily="monospace" fontWeight="bold">18.5 Min</text>
+            <text x="170" y="188" fill="#00ff66" fontSize="7" fontFamily="monospace">▼ -22% vs Prev Week</text>
+            <text x="80" y="245" fill="#aaa" fontSize="7" fontFamily="monospace">Network Status: Global Synchronized Online</text>
+          </>
+        );
+      case 'dna-analyzer':
+      case 'bioethics-care':
+        return (
+          <>
+            <text x="80" y="68" fill="#00e5ff" fontSize="8" fontFamily="monospace" fontWeight="bold">GEN &lt;GO&gt; - GENOMICS SEQUENCER PIPELINE</text>
+            <text x="250" y="68" fill="#ffb000" fontSize="8" fontFamily="monospace" fontWeight="bold">MAPPED: 10M+</text>
+            <path d="M 90 140 Q 110 100 130 140 T 170 140 T 210 140 T 250 140 T 290 140 T 330 140 T 370 140" fill="none" stroke="#00e5ff" strokeWidth="2" />
+            <path d="M 90 140 Q 110 180 130 140 T 170 140 T 210 140 T 250 140 T 290 140 T 330 140 T 370 140" fill="none" stroke="#ffb000" strokeWidth="2" strokeDasharray="2 2" />
+            <line x1="110" y1="120" x2="110" y2="160" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
+            <line x1="150" y1="120" x2="150" y2="160" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
+            <line x1="190" y1="120" x2="190" y2="160" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
+            <line x1="230" y1="120" x2="230" y2="160" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
+            <line x1="270" y1="120" x2="270" y2="160" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
+            <line x1="310" y1="120" x2="310" y2="160" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
+            <line x1="350" y1="120" x2="350" y2="160" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
+            <text x="90" y="200" fill="#fff" fontSize="7" fontFamily="monospace">SEQUENCE IDENTIFIED: Homo_sapiens_Chr7_Locus22</text>
+            <text x="90" y="212" fill="#00ff66" fontSize="7" fontFamily="monospace">Match Confidence: 99.87% (CRISPR Cleavage Approved)</text>
+            <text x="80" y="245" fill="#aaa" fontSize="7" fontFamily="monospace">Database: GenBank Native Remote Mapping</text>
+          </>
+        );
+      case 'console-simulator':
+      case 'remote-console':
+      case 'clinical-collaboration':
+      case 'operator-training':
+        return (
+          <>
+            <text x="80" y="68" fill="#ffb000" fontSize="8" fontFamily="monospace" fontWeight="bold">TERM &lt;GO&gt; - MNEMONIC CLINICAL SHELL</text>
+            <text x="250" y="68" fill="#00ff66" fontSize="8" fontFamily="monospace" fontWeight="bold">ONLINE STATUS</text>
+            <text x="90" y="105" fill="#aaa" fontSize="7" fontFamily="monospace">AEGIS SYSTEMS CORE STACK INITIALIZED...</text>
+            <text x="90" y="120" fill="#fff" fontSize="7" fontFamily="monospace">AEGIS&gt; HELP DASH</text>
+            <text x="90" y="132" fill="#00ff66" fontSize="7" fontFamily="monospace">LOADING CLINICAL TELEMETRY MODULE ON SCREEN B...</text>
+            <text x="90" y="150" fill="#fff" fontSize="7" fontFamily="monospace">AEGIS&gt; CALL SPECIALIST --CARDIOLOGY</text>
+            <text x="90" y="162" fill="#00ff66" fontSize="7" fontFamily="monospace">ROUTING CONCURRENT CONSULT CHAT... (SPECIALIST ACTIVE)</text>
+            <text x="90" y="180" fill="#fff" fontSize="7" fontFamily="monospace">AEGIS&gt; PATIENT --ID 10452 --VITAL</text>
+            <text x="90" y="192" fill="#00e5ff" fontSize="7" fontFamily="monospace">Vitals display: HeartRate 78, Temp 98.6F, Respiration 14</text>
+            <text x="90" y="215" fill="#ffb000" fontSize="8" fontFamily="monospace" fontWeight="bold">AEGIS&gt; _</text>
+            <text x="80" y="245" fill="#aaa" fontSize="7" fontFamily="monospace">Mnemonic shortcuts enabled. Press HELP key for listings.</text>
+          </>
+        );
+      case 'indices-feed':
+      case 'clinical-indices':
+        return (
+          <>
+            <text x="80" y="68" fill="#ffb000" fontSize="8" fontFamily="monospace" fontWeight="bold">IDX &lt;GO&gt; - HEALTHCARE INDICES FEED</text>
+            <text x="250" y="68" fill="#00ff66" fontSize="8" fontFamily="monospace" fontWeight="bold">UPDATE SPEED: 0.1s</text>
+            <path d="M 70 190 L 110 160 L 150 170 L 190 130 L 230 140 L 270 100 L 310 115 L 350 80 L 380 65" fill="none" stroke="#00e5ff" strokeWidth="2" />
+            <path d="M 70 130 L 120 145 L 170 120 L 220 155 L 270 170 L 320 200 L 380 225" fill="none" stroke="#ff3b30" strokeWidth="1.5" strokeDasharray="3 3" />
+            <text x="80" y="235" fill="#00e5ff" fontSize="7" fontFamily="monospace">CDC SEVERITY INDEX: 142.10 (+2.4%)</text>
+            <text x="80" y="245" fill="#aaa" fontSize="7" fontFamily="monospace">Indices aggregator updated real-time globally.</text>
+          </>
+        );
+      default:
+        return (
+          <>
+            <text x="80" y="68" fill="#ffb000" fontSize="8" fontFamily="monospace" fontWeight="bold">GP &lt;GO&gt; - AEGIS SYSTEMS INDEX</text>
+            <text x="250" y="68" fill="#00ff66" fontSize="8" fontFamily="monospace" fontWeight="bold">Uptime: 99.9%</text>
+            <path d="M 70 180 L 110 160 L 140 175 L 180 140 L 220 150 L 260 110 L 300 125 L 340 95 L 380 75" fill="none" stroke="#005aff" strokeWidth="2" />
+            <path d="M 70 120 L 120 135 L 170 110 L 220 145 L 270 160 L 320 190 L 380 215" fill="none" stroke="#ff3b30" strokeWidth="1.5" strokeDasharray="3 3" />
+            <text x="80" y="245" fill="#aaa" fontSize="7" fontFamily="monospace">Active Aegis Pipeline Telemetry Database</text>
+          </>
+        );
+    }
+  };
+
+  const renderRightScreen = () => {
+    let newsFeed = [
+      "FDA PRIORITIZES CANCER BREAKTHROUGH INVESTIGATIONAL DRUGS",
+      "NEW ENGLAND JOURNAL RELEASES COHORT OUTCOME TRIAL ANALYSIS",
+      "CDC WARNING OVER INCREASED RESPIRATORY CASES REGIONALLY"
+    ];
+    let indicatorName1 = "ICU OCCU";
+    let indicatorVal1 = "84.2%";
+    let indicatorTrend1 = "up";
+    let indicatorName2 = "ER WAIT";
+    let indicatorVal2 = "18.5m";
+    let indicatorTrend2 = "down";
+
+    if (widgetType === 'vitals-streamer' || widgetType === 'ai-medical-assist') {
+      newsFeed = [
+        "BEDSIDE TELEMETRY LATENCY DROPS BELOW 2MS IN BOSTON TESTS",
+        "NEW FHIR NATIVE CLOUD PIPELINE LAUNCHED BY HL7 WORKGROUP",
+        "PHYSICIAN CHAT ASSIST ENCOUNTERS 98.7% ACCURATE SUMMARIES"
+      ];
+      indicatorName1 = "VITAL FEED";
+      indicatorVal1 = "1.2B/d";
+      indicatorTrend1 = "up";
+      indicatorName2 = "API LATENCY";
+      indicatorVal2 = "10ms";
+      indicatorTrend2 = "down";
+    } else if (widgetType === 'outbreak-monitor' || widgetType === 'alert-surveillance') {
+      newsFeed = [
+        "CDC MUNICIPAL WATER REPORT FLAGS WATERBORNE EPIDEMIC SIGNS",
+        "ZOONOTIC AVIAN FLU SPREAD HIGHLIGHTED BY VET INSPECTORS",
+        "ER ADMISSION LOAD SHIFTS SPARK BRONCHITIS WARNING IN NY"
+      ];
+      indicatorName1 = "FLUTI LEVEL";
+      indicatorVal1 = "Tier 3";
+      indicatorTrend1 = "up";
+      indicatorName2 = "DETECTION";
+      indicatorVal2 = "88%";
+      indicatorTrend2 = "up";
+    } else if (widgetType === 'risk-calculator' || widgetType === 'diagnostic-analytics') {
+      newsFeed = [
+        "NEURAL RISK DETECTOR ACCURACY EXCEEDS CLINICAL EXPECTATION",
+        "SEPSIS EARLY PREDICTORS REDUCE ICU PATIENT MORTALITY BY 18%",
+        "DICOM LAB IMAGE PIPELINES TRANSFERRED IN SUB-SECOND SPEEDS"
+      ];
+      indicatorName1 = "SEPSIS RISK";
+      indicatorVal1 = "82%";
+      indicatorTrend1 = "up";
+      indicatorName2 = "ERR LEAD TIME";
+      indicatorVal2 = "45m";
+      indicatorTrend2 = "up";
+    } else if (widgetType === 'fda-tracker' || widgetType === 'regulatory-compliance' || widgetType === 'clinical-trials') {
+      newsFeed = [
+        "BREAKTHROUGH ONCOLOGY MOLECULE MOVES TO EXPEDITED FILING",
+        "FDA ACCEPTANCE ON GCP AUDIT TRACKS STABILIZES CLINICAL TRIALS",
+        "FAST-TRACK FDA PIPELINES CUT COMPLIANCE DURATION BY 42%"
+      ];
+      indicatorName1 = "FDA APPR";
+      indicatorVal1 = "100%";
+      indicatorTrend1 = "flat";
+      indicatorName2 = "TRIAL REG";
+      indicatorVal2 = "15k+";
+      indicatorTrend2 = "up";
+    } else if (widgetType === 'operations-roi' || widgetType === 'hospital-systems') {
+      newsFeed = [
+        "HOSPITAL NETWORK CONSOLIDATION CUTS WAITING TIMES BY 35%",
+        "ER TRIAGE RE-ROUTING SAVES $2.4M SYSTEM-WIDE GLOBALLY",
+        "HL7 INTEROPERABILITY ELIMINATES LEGACY EHR INTEGRATION LAGS"
+      ];
+      indicatorName1 = "ER OCCUP";
+      indicatorVal1 = "88%";
+      indicatorTrend1 = "up";
+      indicatorName2 = "SAVINGS";
+      indicatorVal2 = "$2.4M";
+      indicatorTrend2 = "up";
+    } else if (widgetType === 'dna-analyzer' || widgetType === 'bioethics-care') {
+      newsFeed = [
+        "CRISPR CLEAVAGE GENOMICS ANALYSIS ACCELERATES SEQUENCING",
+        "IRB STANDARDS INTEGRATION CONFIRMS CLINICAL CONSENT INTEGRITY",
+        "DEMOGRAPHIC RESOURCE FLOW AUDITS FLAG RURAL ICU SHORTAGES"
+      ];
+      indicatorName1 = "DNA COHORT";
+      indicatorVal1 = "10M+";
+      indicatorTrend1 = "up";
+      indicatorName2 = "CONSENT";
+      indicatorVal2 = "100%";
+      indicatorTrend2 = "flat";
+    }
+
+    return (
+      <>
+        <rect x="425" y="55" width="145" height="110" fill="#080a0f" stroke="#222" strokeWidth="1" />
+        <text x="430" y="65" fill="#ffb000" fontSize="7" fontFamily="monospace" fontWeight="bold">WATCHLIST - INDICATORS</text>
+        
+        <text x="430" y="82" fill="#fff" fontSize="6" fontFamily="monospace">{indicatorName1}</text>
+        <text x="495" y="82" fill={indicatorTrend1 === 'up' ? '#00ff66' : indicatorTrend1 === 'down' ? '#ff3b30' : '#aaa'} fontSize="6" fontFamily="monospace">{indicatorVal1}</text>
+        <text x="540" y="82" fill={indicatorTrend1 === 'up' ? '#00ff66' : indicatorTrend1 === 'down' ? '#ff3b30' : '#aaa'} fontSize="6" fontFamily="monospace">{indicatorTrend1 === 'up' ? '▲' : indicatorTrend1 === 'down' ? '▼' : '●'}</text>
+
+        <text x="430" y="97" fill="#fff" fontSize="6" fontFamily="monospace">{indicatorName2}</text>
+        <text x="495" y="97" fill={indicatorTrend2 === 'up' ? '#00ff66' : indicatorTrend2 === 'down' ? '#ff3b30' : '#aaa'} fontSize="6" fontFamily="monospace">{indicatorVal2}</text>
+        <text x="540" y="97" fill={indicatorTrend2 === 'up' ? '#00ff66' : indicatorTrend2 === 'down' ? '#ff3b30' : '#aaa'} fontSize="6" fontFamily="monospace">{indicatorTrend2 === 'up' ? '▲' : indicatorTrend2 === 'down' ? '▼' : '●'}</text>
+
+        <text x="430" y="112" fill="#fff" fontSize="6" fontFamily="monospace">NET SECURE</text>
+        <text x="495" y="112" fill="#00ff66" fontSize="6" fontFamily="monospace">AES-256</text>
+        <text x="540" y="112" fill="#00ff66" fontSize="6" fontFamily="monospace">●</text>
+
+        <text x="430" y="127" fill="#fff" fontSize="6" fontFamily="monospace">CLIN RESIL</text>
+        <text x="495" y="127" fill="#00e5ff" fontSize="6" fontFamily="monospace">99.99%</text>
+        <text x="540" y="127" fill="#00e5ff" fontSize="6" fontFamily="monospace">▲</text>
+
+        <text x="430" y="142" fill="#fff" fontSize="6" fontFamily="monospace">HOST UPTIME</text>
+        <text x="495" y="142" fill="#00ff66" fontSize="6" fontFamily="monospace">ACTIVE</text>
+        <text x="540" y="142" fill="#00ff66" fontSize="6" fontFamily="monospace">▲</text>
+
+        <rect x="575" y="55" width="150" height="110" fill="#080a0f" stroke="#222" strokeWidth="1" />
+        <text x="580" y="65" fill="#ffb000" fontSize="7" fontFamily="monospace" fontWeight="bold">NEWS - CLINICAL WIRE</text>
+        
+        <text x="580" y="80" fill="#00ff66" fontSize="5.5" fontFamily="monospace">10:44</text>
+        <text x="605" y="80" fill="#fff" fontSize="5.5" fontFamily="monospace">{newsFeed[0]}</text>
+
+        <text x="580" y="105" fill="#00ff66" fontSize="5.5" fontFamily="monospace">10:32</text>
+        <text x="605" y="105" fill="#fff" fontSize="5.5" fontFamily="monospace">{newsFeed[1]}</text>
+
+        <text x="580" y="130" fill="#00ff66" fontSize="5.5" fontFamily="monospace">10:15</text>
+        <text x="605" y="130" fill="#aaa" fontSize="5.5" fontFamily="monospace">{newsFeed[2]}</text>
+
+        <rect x="425" y="170" width="300" height="80" fill="#080a0f" stroke="#222" strokeWidth="1" />
+        <text x="430" y="180" fill="#ffb000" fontSize="7" fontFamily="monospace" fontWeight="bold">WIRE &lt;GO&gt; - REAL-TIME AEGIS PRIORITY FEEDS</text>
+        
+        <text x="430" y="195" fill="#00ff66" fontSize="6" fontFamily="monospace">10:48</text>
+        <text x="460" y="195" fill="#fff" fontSize="6" fontFamily="monospace" fontWeight="bold">SYS UPDATE: {title.toUpperCase()} PROTOCOL ONLINE</text>
+        <text x="430" y="212" fill="#00ff66" fontSize="6" fontFamily="monospace">10:46</text>
+        <text x="460" y="212" fill="#fff" fontSize="6" fontFamily="monospace">CLINICAL STACK INTEGRATING SECURE TLS 1.3 TELEMETRY CHANNEL</text>
+        <text x="430" y="229" fill="#00ff66" fontSize="6" fontFamily="monospace">10:43</text>
+        <text x="460" y="229" fill="#aaa" fontSize="6" fontFamily="monospace">HOSPITAL ADMINISTRATORS VALIDATE EFFICIENCY GAINS ACCROSS WARDS</text>
+      </>
+    );
+  };
+
+  return (
+    <svg viewBox="0 0 800 400" style={{ width: '100%', height: 'auto', display: 'block', maxWidth: '650px', margin: '0 auto' }}>
+      <rect x="385" y="280" width="30" height="90" fill="#222" rx="5" />
+      <ellipse cx="400" cy="370" rx="90" ry="15" fill="#111" />
+      <path d="M 320 280 L 480 280 L 400 320 Z" fill="#1b1b1b" />
+      
+      <rect x="60" y="40" width="330" height="230" fill="#0c0d12" rx="10" stroke="#333" strokeWidth="3" />
+      <rect x="70" y="50" width="310" height="210" fill="#040507" rx="6" />
+      <path d="M 70 85 H 380 M 70 120 H 380 M 70 155 H 380 M 70 190 H 380" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5" />
+      <path d="M 120 50 V 260 M 180 50 V 260 M 240 50 V 260 M 300 50 V 260" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5" />
+      
+      {renderLeftScreen()}
+      
+      <rect x="410" y="40" width="330" height="230" fill="#0c0d12" rx="10" stroke="#333" strokeWidth="3" />
+      <rect x="420" y="50" width="310" height="210" fill="#040507" rx="6" />
+      
+      {renderRightScreen()}
+    </svg>
+  );
+}
+
 function MiniScreenMockup({ feature }) {
   return (
     <div style={{ background: '#000', border: '1px solid #333', borderRadius: '4px', padding: '12px', height: '100px', width: '130px', fontFamily: 'monospace', fontSize: '6px', color: '#00ff66', overflow: 'hidden' }}>
@@ -3112,109 +3438,524 @@ function SubpageView({ pageId, onLaunchTerminal, onBack }) {
     widgetType: "default"
   };
 
+  const [activeSection, setActiveSection] = useState('overview'); // 'overview', 'capabilities', 'sandbox'
+  const isScrollingRef = useRef(false);
+
+  // Demo request form state
+  const [businessSituation, setBusinessSituation] = useState('');
+  const [usedBloomberg, setUsedBloomberg] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneCode, setPhoneCode] = useState('US');
+  const [phone, setPhone] = useState('');
+  const [company, setCompany] = useState('');
+  const [city, setCity] = useState('');
+  const [jobRole, setJobRole] = useState('');
+  const [companyType, setCompanyType] = useState('');
+  const [country, setCountry] = useState('');
+  
+  const [formSubmitting, setFormSubmitting] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formError, setFormError] = useState('');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isScrollingRef.current) return;
+      const sections = ['sub-overview', 'sub-capabilities', 'sub-sandbox'];
+      const scrollPosition = window.scrollY + 180; // offset for headers
+
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(sectionId.replace('sub-', ''));
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [pageId]);
+
+  const handleTabClick = (sectionId) => {
+    setActiveSection(sectionId.replace('sub-', ''));
+    isScrollingRef.current = true;
+    const el = document.getElementById(sectionId);
+    if (el) {
+      const topOffset = el.getBoundingClientRect().top + window.pageYOffset - 150;
+      window.scrollTo({
+        top: topOffset,
+        behavior: 'smooth'
+      });
+    }
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 800);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (!firstName || !lastName || !email || !phone || !company || !city || !jobRole || !companyType || !country) {
+      setFormError('Please fill out all required fields.');
+      return;
+    }
+    setFormError('');
+    setFormSubmitting(true);
+    
+    // Simulate submission lag
+    setTimeout(() => {
+      setFormSubmitting(false);
+      setFormSubmitted(true);
+    }, 1500);
+  };
+
+  const scrollToRequestForm = () => {
+    const el = document.getElementById('request-demo-section');
+    if (el) {
+      const topOffset = el.getBoundingClientRect().top + window.pageYOffset - 150;
+      window.scrollTo({
+        top: topOffset,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    <div style={{ backgroundColor: '#000000', color: '#ffffff', minHeight: '80vh' }}>
-      {/* Subpage Hero */}
+    <div style={{ backgroundColor: '#000000', color: '#ffffff', minHeight: '80vh', fontFamily: "'Inter', sans-serif" }}>
+      
+      {/* Subpage Hero with Custom Page Gradient */}
       <section style={{
-        background: config.heroGradient,
-        padding: '80px 24px',
+        background: config.heroGradient || 'linear-gradient(105deg, #000000 45%, #cc8e08 100%)',
+        padding: '90px 24px',
         borderBottom: '1px solid #111',
         position: 'relative',
         overflow: 'hidden'
       }}>
         <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '60px', alignItems: 'center' }}>
           <div>
-            <span style={{ color: 'var(--accent-gold)', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px', letterSpacing: '1px', display: 'block', marginBottom: '16px' }}>
-              Aegis Professional Services
+            <span style={{ color: '#ff9900', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '13px', letterSpacing: '1.5px', display: 'block', marginBottom: '16px' }}>
+              Bloomberg Professional Services
             </span>
-            <h1 style={{ fontSize: '48px', fontWeight: '800', color: '#ffffff', lineHeight: '1.2', marginBottom: '24px' }}>
+            <h1 style={{ fontSize: '48px', fontWeight: '800', color: '#ffffff', lineHeight: '1.15', marginBottom: '24px', letterSpacing: '-0.5px' }}>
               {config.title}
             </h1>
-            <p style={{ fontSize: '18px', color: '#cccccc', lineHeight: '1.6', marginBottom: '36px', maxWidth: '650px' }}>
+            <p style={{ fontSize: '18px', color: '#dddddd', lineHeight: '1.6', marginBottom: '36px', maxWidth: '650px' }}>
               {config.subtitle}
             </p>
             <div style={{ display: 'flex', gap: '16px' }}>
-              <button className="btn-primary" onClick={onLaunchTerminal} style={{ backgroundColor: '#005aff', color: '#fff', border: 'none', padding: '14px 28px', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer' }}>
-                Launch Aegis Terminal Demo
+              <button className="btn-primary" onClick={scrollToRequestForm} style={{ backgroundColor: '#005aff', color: '#fff', border: 'none', padding: '16px 36px', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer' }}>
+                Request a Demo
               </button>
-              <button className="btn-secondary" onClick={onBack} style={{ border: '1px solid #444', color: '#fff', padding: '13px 27px', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer', background: 'transparent' }}>
-                Back to Services Directory
+              <button className="btn-secondary" onClick={onBack} style={{ border: '1px solid #444', color: '#fff', padding: '15px 35px', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer', background: 'transparent' }}>
+                Back to Directory
               </button>
             </div>
           </div>
-          {/* Decorative Graph overlay */}
-          <div style={{ display: 'flex', justifyContent: 'center', opacity: 0.8 }}>
-            <svg viewBox="0 0 100 100" style={{ width: '160px', height: '160px' }}>
-              <circle cx="50" cy="50" r="45" fill="none" stroke="#222" strokeWidth="1" />
-              <circle cx="50" cy="50" r="30" fill="none" stroke="#333" strokeWidth="1" strokeDasharray="3,3" />
-              <path d="M 50 5 L 50 95 M 5 50 L 95 50" stroke="#222" strokeWidth="1" />
-              <circle cx="50" cy="50" r="45" fill="none" stroke="var(--accent-gold)" strokeWidth="1.5" strokeDasharray="10 30" style={{ transformOrigin: '50px 50px' }} />
-            </svg>
+          
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <ClinicalDualMonitorSvg widgetType={config.widgetType} title={config.title} />
           </div>
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <section style={{ backgroundColor: '#090a0f', borderBottom: '1px solid #111', padding: '30px 24px' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: `repeat(${config.stats.length}, 1fr)`, gap: '40px', textAlign: 'center' }}>
-          {config.stats.map((s, idx) => (
-            <div key={idx} style={{ borderLeft: idx > 0 ? '1px solid #222' : 'none' }}>
-              <div style={{ fontSize: '36px', fontWeight: '800', color: '#fff', fontFamily: 'monospace' }}>{s.value}</div>
-              <div style={{ fontSize: '12px', color: '#888', textTransform: 'uppercase', fontWeight: 'bold', marginTop: '6px', letterSpacing: '0.5px' }}>{s.label}</div>
-            </div>
+      {/* Anchor Navigation Bar - White Background & Black Text */}
+      <div style={{ 
+        position: 'sticky', 
+        top: '70px', 
+        zIndex: 90, 
+        backgroundColor: '#ffffff', 
+        borderBottom: '1px solid #e0e0e0', 
+        padding: '0 24px' 
+      }}>
+        <div className="container" style={{ display: 'flex', gap: '30px' }}>
+          {[
+            { id: 'sub-overview', label: 'Overview' },
+            { id: 'sub-capabilities', label: 'Enterprise Capabilities' },
+            { id: 'sub-sandbox', label: 'Interactive Sandbox' }
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => handleTabClick(tab.id)}
+              style={{
+                background: 'none',
+                border: 'none',
+                borderBottom: activeSection === tab.id.replace('sub-', '') ? '3px solid #000000' : '3px solid transparent',
+                color: activeSection === tab.id.replace('sub-', '') ? '#000000' : '#555555',
+                padding: '16px 0',
+                fontSize: '13px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              {tab.label}
+            </button>
           ))}
         </div>
-      </section>
+      </div>
 
-      {/* Main Content Layout */}
-      <section className="container" style={{ padding: '80px 24px', display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '60px' }}>
-        {/* Left Side: Capabilities details */}
-        <div>
-          <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#fff', marginBottom: '40px' }}>
-            Enterprise Capabilities
-          </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-            {config.capabilities.map((c, idx) => (
-              <div key={idx} style={{ display: 'flex', gap: '20px' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '4px', backgroundColor: '#111', border: '1px solid #333', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-gold)', fontSize: '18px', flexShrink: 0 }}>
-                  {idx + 1}
+      {/* CONTENT PANEL - Crisp White Background for Subpage Content */}
+      <div style={{ backgroundColor: '#ffffff', color: '#111111', padding: '60px 0', minHeight: '500px' }}>
+        <div className="container" style={{ padding: '0 24px' }}>
+          
+          {/* OVERVIEW SECTION */}
+          <section id="sub-overview" style={{ scrollMarginTop: '160px', paddingBottom: '60px' }}>
+            <p style={{ fontSize: '17px', lineHeight: '1.7', color: '#333333', maxWidth: '1000px', marginBottom: '50px' }}>
+              {config.subtitle} Deploy advanced data pipelines, low-latency telemetry feeds, and regulatory compliance indexes configured specifically for modern professional environments.
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: `repeat(${config.stats.length}, 1fr)`, gap: '24px' }}>
+              {config.stats.map((s, idx) => (
+                <div key={idx} style={{ padding: '30px 24px', backgroundColor: '#f4f6f9', border: '1px solid #e1e4e8', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '16px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '48px', fontWeight: '800', color: '#005aff', fontFamily: 'monospace' }}>
+                    {s.value}
+                  </div>
+                  <h3 style={{ fontSize: '15px', fontWeight: 'bold', color: '#111', margin: 0 }}>
+                    {s.label}
+                  </h3>
                 </div>
-                <div>
-                  <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', marginBottom: '8px' }}>{c.title}</h3>
-                  <p style={{ color: '#888', fontSize: '14px', lineHeight: '1.6' }}>{c.desc}</p>
+              ))}
+            </div>
+          </section>
+
+          <hr style={{ border: 'none', borderBottom: '1px solid #e5e5e5', margin: '60px 0' }} />
+
+          {/* CAPABILITIES SECTION */}
+          <section id="sub-capabilities" style={{ scrollMarginTop: '160px', paddingBottom: '60px' }}>
+            <h2 style={{ fontSize: '26px', fontWeight: '800', textAlign: 'center', marginBottom: '40px', color: '#111' }}>
+              Capabilities included with {config.title}
+            </h2>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+              {config.capabilities.map((c, idx) => (
+                <div key={idx} style={{ padding: '30px 24px', backgroundColor: '#f4f6f9', border: '1px solid #e1e4e8', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div style={{ 
+                    width: '40px', 
+                    height: '40px', 
+                    borderRadius: '4px', 
+                    backgroundColor: '#e2edff', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    color: '#005aff', 
+                    fontSize: '18px', 
+                    fontWeight: 'bold' 
+                  }}>
+                    {idx + 1}
+                  </div>
+                  <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#111', margin: 0 }}>
+                    {c.title}
+                  </h3>
+                  <p style={{ color: '#555', fontSize: '13px', lineHeight: '1.6', margin: 0 }}>
+                    {c.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <hr style={{ border: 'none', borderBottom: '1px solid #e5e5e5', margin: '60px 0' }} />
+
+          {/* INTERACTIVE SANDBOX SECTION */}
+          <section id="sub-sandbox" style={{ scrollMarginTop: '160px', paddingBottom: '60px' }}>
+            <h2 style={{ fontSize: '26px', fontWeight: '800', textAlign: 'center', marginBottom: '40px', color: '#111' }}>
+              Interactive Demo Sandbox
+            </h2>
+            <div style={{ maxWidth: '900px', margin: '0 auto', background: '#0a0d14', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '8px', padding: '30px' }}>
+              <SubpageWidget type={config.widgetType} />
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+      {/* REQUEST A DEMO / CONTACT US SECTION */}
+      <section id="request-demo-section" style={{ backgroundColor: '#ffffff', color: '#111111', borderTop: '1px solid #e0e0e0', padding: '90px 24px', scrollMarginTop: '160px' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '60px' }}>
+          
+          {/* Left Column: Contact details */}
+          <div>
+            <h2 style={{ fontSize: '42px', fontWeight: '800', color: '#111', margin: '0 0 40px 0' }}>Contact us</h2>
+            
+            <div style={{ padding: '30px', backgroundColor: '#f4f6f9', borderRadius: '6px', border: '1px solid #e1e4e8', maxWidth: '420px' }}>
+              <span style={{ display: 'inline-block', backgroundColor: '#e2edff', color: '#005aff', fontWeight: 'bold', fontSize: '9px', letterSpacing: '0.5px', padding: '4px 8px', borderRadius: '3px', marginBottom: '16px' }}>HELP & SUPPORT</span>
+              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#111', margin: '0 0 10px 0' }}>Already a customer?</h3>
+              <p style={{ color: '#555', fontSize: '13px', lineHeight: '1.6', marginBottom: '20px' }}>
+                If you have queries regarding software installations, key replacements, or billing, connect with support.
+              </p>
+              <a 
+                href="/login/" 
+                onClick={(e) => { e.preventDefault(); onLaunchTerminal(); }} 
+                style={{ color: '#005aff', fontWeight: 'bold', fontSize: '13px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              >
+                Get in touch with the support team ➔
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column: Dynamic Form */}
+          <div style={{ padding: '10px 0' }}>
+            
+            {formSubmitted ? (
+              <div style={{ padding: '40px', backgroundColor: '#f4fffa', border: '1.5px solid #00c853', borderRadius: '6px', textAlign: 'center' }}>
+                <span style={{ fontSize: '48px', color: '#00c853', display: 'block', marginBottom: '16px' }}>✓</span>
+                <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#111', marginBottom: '10px' }}>Thank you, {firstName}!</h3>
+                <p style={{ color: '#333', fontSize: '14px', lineHeight: '1.6', marginBottom: '30px', maxWidth: '500px', margin: '0 auto 30px auto' }}>
+                  We have received your Bloomberg Professional Services demo request. A specialist will contact you shortly at <strong>{email}</strong> to review your system requirements.
+                </p>
+                <div style={{ backgroundColor: '#ffffff', padding: '24px', borderRadius: '6px', border: '1px solid #d4ecd5', display: 'inline-block' }}>
+                  <p style={{ color: '#555', fontSize: '13px', margin: '0 0 16px 0' }}>
+                    In the meantime, you can launch our interactive monospaced Terminal simulator:
+                  </p>
+                  <button 
+                    onClick={onLaunchTerminal}
+                    style={{ backgroundColor: '#005aff', color: '#fff', border: 'none', padding: '14px 32px', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer' }}
+                  >
+                    Launch Terminal Simulator
+                  </button>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
+            ) : (
+              <form onSubmit={handleFormSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#111', borderBottom: '1px solid #e0e0e0', paddingBottom: '12px', margin: 0 }}>
+                  Help us connect you to the right person
+                </h3>
 
-        {/* Right Side: Interactive Sandbox Widget */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <h2 style={{ fontSize: '24px', fontWeight: '800', color: '#fff', marginBottom: '10px' }}>
-            Interactive Demo Sandbox
-          </h2>
-          <div className="glass" style={{ padding: '30px', background: '#0a0d14', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <SubpageWidget type={config.widgetType} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <label style={{ fontSize: '13px', fontWeight: '600', color: '#333' }}>
+                    Please explain the business situation or problem you are trying to manage. *
+                  </label>
+                  <textarea 
+                    value={businessSituation}
+                    onChange={(e) => setBusinessSituation(e.target.value)}
+                    required
+                    rows="4" 
+                    placeholder="Provide details about your firm's asset management, data feeds, or trading workflow..."
+                    style={{ width: '100%', padding: '12px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: 'sans-serif' }}
+                  />
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <label style={{ fontSize: '13px', fontWeight: '600', color: '#333' }}>
+                    Have you ever used the Bloomberg Professional Service? *
+                  </label>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '13px' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                      <input 
+                        type="radio" 
+                        name="usedBloomberg" 
+                        value="yes" 
+                        checked={usedBloomberg === 'yes'}
+                        onChange={(e) => setUsedBloomberg(e.target.value)}
+                        required 
+                      /> Yes
+                    </label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                      <input 
+                        type="radio" 
+                        name="usedBloomberg" 
+                        value="no" 
+                        checked={usedBloomberg === 'no'}
+                        onChange={(e) => setUsedBloomberg(e.target.value)}
+                      /> No
+                    </label>
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>First name *</label>
+                    <input 
+                      type="text" 
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required 
+                      style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }} 
+                    />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Last name *</label>
+                    <input 
+                      type="text" 
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      required 
+                      style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }} 
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Work email *</label>
+                  <input 
+                    type="email" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required 
+                    style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }} 
+                  />
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Phone *</label>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <select 
+                      value={phoneCode}
+                      onChange={(e) => setPhoneCode(e.target.value)}
+                      style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc', width: '150px' }}
+                    >
+                      <option value="US">United States (+1)</option>
+                      <option value="UK">United Kingdom (+44)</option>
+                      <option value="IN">India (+91)</option>
+                      <option value="CA">Canada (+1)</option>
+                      <option value="DE">Germany (+49)</option>
+                    </select>
+                    <input 
+                      type="tel" 
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      required 
+                      placeholder="Phone number"
+                      style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc', flexGrow: 1 }} 
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Company *</label>
+                    <input 
+                      type="text" 
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                      required 
+                      style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }} 
+                    />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>City *</label>
+                    <input 
+                      type="text" 
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      required 
+                      style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }} 
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Job role *</label>
+                  <select 
+                    value={jobRole}
+                    onChange={(e) => setJobRole(e.target.value)}
+                    required
+                    style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }}
+                  >
+                    <option value="">Select one</option>
+                    <option value="Analyst">Analyst</option>
+                    <option value="Trader">Trader</option>
+                    <option value="Portfolio Manager">Portfolio Manager</option>
+                    <option value="Risk Manager">Risk Manager</option>
+                    <option value="CEO">Chief Executive Officer</option>
+                    <option value="Student">Student</option>
+                    <option value="Other">Other / Not Applicable</option>
+                  </select>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Company type *</label>
+                  <select 
+                    value={companyType}
+                    onChange={(e) => setCompanyType(e.target.value)}
+                    required
+                    style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }}
+                  >
+                    <option value="">Select one</option>
+                    <option value="Asset Management">Asset Management Firm</option>
+                    <option value="Broker Dealer">Broker Dealer</option>
+                    <option value="Corporation">Corporation (Non-Financial)</option>
+                    <option value="Commercial Bank">Commercial Bank</option>
+                    <option value="Hedge Fund">Hedge Fund</option>
+                    <option value="Private Equity">Private Equity / Venture Capital</option>
+                    <option value="RIA">RIA / Wealth Management</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Country or region *</label>
+                  <select 
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    required
+                    style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }}
+                  >
+                    <option value="">Select one</option>
+                    <option value="United States">United States</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="India">India</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Australia">Australia</option>
+                  </select>
+                </div>
+
+                {formError && (
+                  <div style={{ color: '#ff3b30', fontSize: '13px', fontWeight: 'bold' }}>
+                    {formError}
+                  </div>
+                )}
+
+                <button 
+                  type="submit" 
+                  disabled={formSubmitting}
+                  style={{ 
+                    backgroundColor: '#005aff', 
+                    color: '#ffffff', 
+                    border: 'none', 
+                    padding: '14px', 
+                    borderRadius: '4px', 
+                    fontWeight: 'bold', 
+                    fontSize: '14px', 
+                    cursor: formSubmitting ? 'not-allowed' : 'pointer',
+                    marginTop: '10px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '10px'
+                  }}
+                >
+                  {formSubmitting ? (
+                    <>
+                      <div style={{ width: '16px', height: '16px', border: '2px solid #fff', borderTop: '2px solid transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+                      Submitting Request...
+                    </>
+                  ) : 'Submit Request'}
+                </button>
+              </form>
+            )}
+
           </div>
+
         </div>
       </section>
-
-      {/* Final Action CTA Block */}
-      <section style={{ backgroundColor: '#000', borderTop: '1px solid #111', padding: '80px 24px' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'center' }}>
-          <div className="glass" style={{ width: '900px', padding: '50px', textAlign: 'center', background: 'linear-gradient(180deg, #11141c 0%, #080a0f 100%)', border: '1px solid rgba(255,255,255,0.05)' }}>
-            <h3 style={{ fontSize: '28px', fontWeight: '800', color: '#fff', marginBottom: '16px' }}>
-              Full Integration inside Aegis Terminal
-            </h3>
-            <p style={{ color: '#aaa', fontSize: '14px', lineHeight: '1.6', marginBottom: '32px', maxWidth: '600px', margin: '0 auto 32px auto' }}>
-              This capability is fully synchronized inside the Aegis Terminal workspace. Enter the biometrically secured command console to test clinical news wires, outbreak tracking maps, and live SSE ECG monitors.
-            </p>
-            <button className="btn-primary" onClick={onLaunchTerminal} style={{ backgroundColor: '#005aff', padding: '14px 36px', fontSize: '14px', fontWeight: 'bold' }}>
-              Launch Full Terminal Workspace
-            </button>
-          </div>
-        </div>
-      </section>
+      
+      {/* Keyframe spinner style hack */}
+      <style>{`
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   );
 }
