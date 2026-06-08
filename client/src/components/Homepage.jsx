@@ -1927,7 +1927,455 @@ function SubpageWidget({ type }) {
   return <DefaultGaugeWidget />;
 }
 
+function TerminalSubpageView({ onLaunchTerminal, onBack }) {
+  const [activeSection, setActiveSection] = useState('overview'); // 'overview', 'features', 'access', 'resources'
+  const [activeFeature, setActiveFeature] = useState('dash'); // 'dash', 'pat', 'epidemic', 'fda', 'chat'
+
+  return (
+    <div style={{ backgroundColor: '#000000', color: '#ffffff', minHeight: '80vh', fontFamily: "'Inter', sans-serif" }}>
+      {/* Subpage Hero */}
+      <section style={{
+        background: 'radial-gradient(circle at top, #0f2c25 0%, #000000 80%)',
+        padding: '80px 24px',
+        borderBottom: '1px solid #111',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '60px', alignItems: 'center' }}>
+          <div>
+            <span style={{ color: 'var(--accent-gold)', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px', letterSpacing: '1px', display: 'block', marginBottom: '16px' }}>
+              Aegis Professional Services
+            </span>
+            <h1 style={{ fontSize: '48px', fontWeight: '800', color: '#ffffff', lineHeight: '1.2', marginBottom: '24px' }}>
+              Aegis Terminal
+            </h1>
+            <p style={{ fontSize: '18px', color: '#cccccc', lineHeight: '1.6', marginBottom: '36px', maxWidth: '650px' }}>
+              The premier platform for clinical decision-makers who require real-time patient telemetry, global disease intelligence, and secure clinical collaboration.
+            </p>
+            <div style={{ display: 'flex', gap: '16px' }}>
+              <button className="btn-primary" onClick={onLaunchTerminal} style={{ backgroundColor: '#005aff', color: '#fff', border: 'none', padding: '14px 28px', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer' }}>
+                Launch Aegis Terminal Demo
+              </button>
+              <button className="btn-secondary" onClick={onBack} style={{ border: '1px solid #444', color: '#fff', padding: '13px 27px', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer', background: 'transparent' }}>
+                Back to Services Directory
+              </button>
+            </div>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', opacity: 0.8 }}>
+            <svg viewBox="0 0 100 100" style={{ width: '160px', height: '160px' }}>
+              <circle cx="50" cy="50" r="45" fill="none" stroke="#222" strokeWidth="1" />
+              <circle cx="50" cy="50" r="30" fill="none" stroke="#333" strokeWidth="1" strokeDasharray="3,3" />
+              <path d="M 50 5 L 50 95 M 5 50 L 95 50" stroke="#222" strokeWidth="1" />
+              <circle cx="50" cy="50" r="45" fill="none" stroke="var(--accent-gold)" strokeWidth="1.5" strokeDasharray="10 30" style={{ transformOrigin: '50px 50px' }} />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      {/* Anchor Navigation Bar */}
+      <div style={{ 
+        position: 'sticky', 
+        top: '70px', 
+        zIndex: 90, 
+        backgroundColor: '#090a0f', 
+        borderBottom: '1px solid #222', 
+        padding: '0 24px' 
+      }}>
+        <div className="container" style={{ display: 'flex', gap: '40px' }}>
+          {['overview', 'features', 'access', 'resources'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveSection(tab)}
+              style={{
+                background: 'none',
+                border: 'none',
+                borderBottom: activeSection === tab ? '2px solid var(--accent-gold)' : '2px solid transparent',
+                color: activeSection === tab ? 'var(--accent-gold)' : '#aaaaaa',
+                padding: '16px 0',
+                fontSize: '14px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Section Content */}
+      <div className="container" style={{ padding: '60px 24px' }}>
+        
+        {/* OVERVIEW SECTION */}
+        {activeSection === 'overview' && (
+          <div>
+            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#fff', marginBottom: '16px' }}>
+              The clinical ecosystem in a single workspace.
+            </h2>
+            <p style={{ color: '#aaa', fontSize: '15px', lineHeight: '1.6', marginBottom: '40px', maxWidth: '800px' }}>
+              The Aegis Terminal connects healthcare institutions, clinical laboratories, ER triage networks, and drug regulatory workflows into a low-latency, secure monospaced command center. Empowering physicians to act faster and base bedside decisions on real-time streaming vitals.
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', marginBottom: '60px' }}>
+              <div className="glass" style={{ padding: '24px', border: '1px solid rgba(255,255,255,0.05)', background: '#0a0d14' }}>
+                <div style={{ color: 'var(--accent-gold)', fontSize: '24px', marginBottom: '16px' }}>🕸️</div>
+                <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '8px' }}>The Clinical Network</h3>
+                <p style={{ color: '#888', fontSize: '12px', lineHeight: '1.5' }}>Instant messaging consultation channels connecting on-duty specialists, cardiologists, and emergency practitioners.</p>
+              </div>
+              <div className="glass" style={{ padding: '24px', border: '1px solid rgba(255,255,255,0.05)', background: '#0a0d14' }}>
+                <div style={{ color: 'var(--accent-gold)', fontSize: '24px', marginBottom: '16px' }}>📈</div>
+                <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '8px' }}>Live Telemetry Feeds</h3>
+                <p style={{ color: '#888', fontSize: '12px', lineHeight: '1.5' }}>Bedside monitors broadcast patient ECG waves and SpO2 indicators directly into multi-screen terminal panels.</p>
+              </div>
+              <div className="glass" style={{ padding: '24px', border: '1px solid rgba(255,255,255,0.05)', background: '#0a0d14' }}>
+                <div style={{ color: 'var(--accent-gold)', fontSize: '24px', marginBottom: '16px' }}>🧬</div>
+                <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '8px' }}>EHR & Lab Databases</h3>
+                <p style={{ color: '#888', fontSize: '12px', lineHeight: '1.5' }}>Integrates with HL7/FHIR server APIs for zero-delay patient file lookups, genome mapping, and lab orders.</p>
+              </div>
+              <div className="glass" style={{ padding: '24px', border: '1px solid rgba(255,255,255,0.05)', background: '#0a0d14' }}>
+                <div style={{ color: 'var(--accent-gold)', fontSize: '24px', marginBottom: '16px' }}>🛡️</div>
+                <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '8px' }}>FDA Priority Audit</h3>
+                <p style={{ color: '#888', fontSize: '12px', lineHeight: '1.5' }}>Streamlined filing logs, clinical study tracking dashboards, and regulatory priority approval indexes.</p>
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px', borderTop: '1px solid #222', paddingTop: '40px', textAlign: 'center' }}>
+              <div>
+                <div style={{ fontSize: '48px', fontWeight: '800', color: '#fff', fontFamily: 'monospace' }}>350,000+</div>
+                <div style={{ fontSize: '11px', color: '#888', textTransform: 'uppercase', marginTop: '8px', fontWeight: 'bold' }}>Active Clinical Operators</div>
+              </div>
+              <div>
+                <div style={{ fontSize: '48px', fontWeight: '800', color: '#fff', fontFamily: 'monospace' }}>&lt; 2ms</div>
+                <div style={{ fontSize: '11px', color: '#888', textTransform: 'uppercase', marginTop: '8px', fontWeight: 'bold' }}>Average Telemetry Latency</div>
+              </div>
+              <div>
+                <div style={{ fontSize: '48px', fontWeight: '800', color: '#fff', fontFamily: 'monospace' }}>99.999%</div>
+                <div style={{ fontSize: '11px', color: '#888', textTransform: 'uppercase', marginTop: '8px', fontWeight: 'bold' }}>Active Service Uptime</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* FEATURES SECTION */}
+        {activeSection === 'features' && (
+          <div>
+            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#fff', marginBottom: '16px' }}>
+              Core Command Features
+            </h2>
+            <p style={{ color: '#aaa', fontSize: '15px', lineHeight: '1.6', marginBottom: '32px', maxWidth: '800px' }}>
+              Select a command code from the left sidebar to preview the monospaced panel screens executing on the Aegis Terminal in real-time.
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '40px' }}>
+              {/* Feature Selection Sidebar */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {[
+                  { id: 'dash', label: 'DASH <GO>', desc: 'Clinic status & overall ICU load charts.' },
+                  { id: 'pat', label: 'PATIENT [ID] <GO>', desc: 'Bedside streaming ECG & patient stats.' },
+                  { id: 'epidemic', label: 'EPIDEMIC <GO>', desc: 'Surveillance outbreak alert mapping.' },
+                  { id: 'fda', label: 'FDA <GO>', desc: 'Clinical trial molecular class log.' },
+                  { id: 'chat', label: 'CHAT <GO>', desc: 'Specialist message consult loop.' }
+                ].map((f) => (
+                  <div
+                    key={f.id}
+                    onClick={() => setActiveFeature(f.id)}
+                    style={{
+                      padding: '16px',
+                      borderRadius: '8px',
+                      background: activeFeature === f.id ? 'rgba(0, 90, 255, 0.1)' : '#0a0d14',
+                      border: activeFeature === f.id ? '1px solid #005aff' : '1px solid rgba(255,255,255,0.04)',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    <div style={{ fontWeight: 'bold', fontSize: '14px', color: activeFeature === f.id ? '#00e5ff' : '#fff', fontFamily: 'monospace' }}>
+                      {f.label}
+                    </div>
+                    <div style={{ fontSize: '11px', color: '#888', marginTop: '6px' }}>
+                      {f.desc}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Terminal Workspace Mock Display */}
+              <div className="glass" style={{
+                background: '#040507',
+                border: '1.5px solid #00ff66',
+                boxShadow: '0 0 20px rgba(0, 255, 102, 0.1)',
+                borderRadius: '8px',
+                padding: '24px',
+                minHeight: '340px',
+                fontFamily: 'monospace',
+                fontSize: '12px',
+                position: 'relative'
+              }}>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  borderBottom: '1px solid #222',
+                  paddingBottom: '8px',
+                  marginBottom: '16px',
+                  fontSize: '10px',
+                  color: '#00ff66'
+                }}>
+                  <span>AEGIS HEALTH TERMINAL - SCREEN PREVIEW</span>
+                  <span>SYS.OK</span>
+                </div>
+
+                {activeFeature === 'dash' && (
+                  <div style={{ color: '#00ff66' }}>
+                    <div style={{ color: '#fff', fontWeight: 'bold', marginBottom: '12px' }}>DASHBOARD CLINICAL INDEXES:</div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '8px', borderBottom: '1px solid #333', paddingBottom: '6px', marginBottom: '8px', color: '#888' }}>
+                      <span>INDEX</span>
+                      <span>VALUE</span>
+                      <span>TREND</span>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '8px', margin: '4px 0' }}>
+                      <span>AEGIS BIOTECH INDEX</span>
+                      <span style={{ color: '#fff' }}>3,842.10</span>
+                      <span style={{ color: '#00ff66' }}>+1.12% ▲</span>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '8px', margin: '4px 0' }}>
+                      <span>CDC EPIDEMIC LEVEL</span>
+                      <span style={{ color: '#fff' }}>4.8</span>
+                      <span style={{ color: '#00ff66' }}>+3.23% ▲</span>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '8px', margin: '4px 0' }}>
+                      <span>US HOSP TRIAGE TIME</span>
+                      <span style={{ color: '#fff' }}>144 min</span>
+                      <span style={{ color: '#ff3b30' }}>+9.09% ▲</span>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '8px', margin: '4px 0' }}>
+                      <span>FDA DRUG APPR RATE</span>
+                      <span style={{ color: '#fff' }}>88%</span>
+                      <span style={{ color: '#888' }}>0.00% ─</span>
+                    </div>
+                  </div>
+                )}
+
+                {activeFeature === 'pat' && (
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', color: '#fff', marginBottom: '12px' }}>
+                      <span>PATIENT 102: JANE SMITH</span>
+                      <span style={{ color: '#00e5ff' }}>ROOM ER-B2</span>
+                    </div>
+                    <EkgMiniCanvas />
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginTop: '16px', color: '#00ff66', textAlign: 'center' }}>
+                      <div style={{ border: '1px solid #222', padding: '6px', borderRadius: '4px' }}>
+                        <div style={{ fontSize: '8px', color: '#888' }}>HR</div>
+                        <div style={{ fontSize: '14px', fontWeight: 'bold', color: '#ff3b30' }}>104 bpm</div>
+                      </div>
+                      <div style={{ border: '1px solid #222', padding: '6px', borderRadius: '4px' }}>
+                        <div style={{ fontSize: '8px', color: '#888' }}>SpO2</div>
+                        <div style={{ fontSize: '14px', fontWeight: 'bold', color: '#00e5ff' }}>91% ⚠️</div>
+                      </div>
+                      <div style={{ border: '1px solid #222', padding: '6px', borderRadius: '4px' }}>
+                        <div style={{ fontSize: '8px', color: '#888' }}>BP</div>
+                        <div style={{ fontSize: '14px', fontWeight: 'bold', color: '#fff' }}>118/75</div>
+                      </div>
+                      <div style={{ border: '1px solid #222', padding: '6px', borderRadius: '4px' }}>
+                        <div style={{ fontSize: '8px', color: '#888' }}>RR</div>
+                        <div style={{ fontSize: '14px', fontWeight: 'bold', color: '#ff9900' }}>24 bpm</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeFeature === 'epidemic' && (
+                  <div style={{ color: '#ff9900' }}>
+                    <div style={{ color: '#fff', fontWeight: 'bold', marginBottom: '12px' }}>CDC PATHOGEN ALERT WIRE:</div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <div style={{ borderLeft: '3px solid #ff3b30', paddingLeft: '10px', margin: '4px 0' }}>
+                        <div style={{ fontSize: '10px', color: '#888' }}>09:12 - REGIONAL ALERT</div>
+                        <div style={{ color: '#ff3b30', fontWeight: 'bold' }}>H5N1 AVIAN FLU CLUSTER DETECTED</div>
+                        <div style={{ color: '#aaa', fontSize: '11px' }}>Local R0 value rises to 1.45 in poultry farms; priority sequence tests underway.</div>
+                      </div>
+                      <div style={{ borderLeft: '3px solid #ff9900', paddingLeft: '10px', margin: '4px 0' }}>
+                        <div style={{ fontSize: '10px', color: '#888' }}>08:44 - VOLATILITY WARNING</div>
+                        <div style={{ color: '#ff9900', fontWeight: 'bold' }}>ER WAIT TIMES UP 12% IN DISTRICT 4</div>
+                        <div style={{ color: '#aaa', fontSize: '11px' }}>Staffing shortages in radiology units cause bed allocation bottlenecking.</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeFeature === 'fda' && (
+                  <div style={{ color: '#00e5ff' }}>
+                    <div style={{ color: '#fff', fontWeight: 'bold', marginBottom: '12px' }}>FDA INVESTIGATIONAL DRUG PIPELINE:</div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <div style={{ background: '#0a0d14', border: '1px solid #222', padding: '10px', borderRadius: '4px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>
+                          <span>Memorall (Mem104)</span>
+                          <span style={{ color: '#00ff66' }}>Phase III</span>
+                        </div>
+                        <div style={{ color: '#aaa', fontSize: '11px', marginTop: '4px' }}>Sponsor: Aegis BioLabs | Efficacy: 78% amyloid plaque reduction.</div>
+                      </div>
+                      <div style={{ background: '#0a0d14', border: '1px solid #222', padding: '10px', borderRadius: '4px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>
+                          <span>CardioShield (CS-9)</span>
+                          <span style={{ color: '#ffb000' }}>Phase II</span>
+                        </div>
+                        <div style={{ color: '#aaa', fontSize: '11px', marginTop: '4px' }}>Sponsor: NovaTherapeutics | Efficacy: 18% LVEF increase.</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeFeature === 'chat' && (
+                  <div style={{ display: 'flex', flexDirection: 'column', height: '260px', justifyContent: 'space-between' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', overflowY: 'auto', paddingRight: '4px' }}>
+                      <div style={{ alignSelf: 'flex-start', background: '#11141c', border: '1px solid #333', padding: '8px 12px', borderRadius: '6px', maxWidth: '85%' }}>
+                        <div style={{ fontSize: '9px', color: '#ffb000', marginBottom: '2px' }}>Dr. John Carter (ER Chief)</div>
+                        <div style={{ color: '#fff' }}>Do you have the latest panel results on patient Jane Smith? Her vitals seem unstable.</div>
+                      </div>
+                      <div style={{ alignSelf: 'flex-end', background: '#0a1d10', border: '1px solid #00ff66', padding: '8px 12px', borderRadius: '6px', maxWidth: '85%' }}>
+                        <div style={{ fontSize: '9px', color: '#00ff66', marginBottom: '2px' }}>You</div>
+                        <div style={{ color: '#fff' }}>Yes, her SpO2 is 91% and RR is 24. Initiated nebulized albuterol.</div>
+                      </div>
+                    </div>
+                    <div style={{ borderTop: '1px solid #222', paddingTop: '10px', color: '#666' }}>
+                      Type message prompt and press &lt;GO&gt; to send...
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ACCESS SECTION */}
+        {activeSection === 'access' && (
+          <div>
+            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#fff', marginBottom: '16px' }}>
+              Access Aegis Terminal Everywhere
+            </h2>
+            <p style={{ color: '#aaa', fontSize: '15px', lineHeight: '1.6', marginBottom: '40px', maxWidth: '800px' }}>
+              Clinicians require secure, low-latency access to telemetry feeds, whether at the bedside, in the hospital workspace, or responding to regional calls from remote home networks.
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px', marginBottom: '40px' }}>
+              <div className="glass" style={{ padding: '30px', background: '#0a0d14', border: '1px solid rgba(255,255,255,0.06)' }}>
+                <div style={{ fontSize: '32px', marginBottom: '20px' }}>🖥️</div>
+                <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', marginBottom: '12px' }}>Aegis Desktop App</h3>
+                <p style={{ color: '#888', fontSize: '13px', lineHeight: '1.6', marginBottom: '20px' }}>
+                  The full dual-monitor clinical terminal interface, optimized for ICU dashboard hubs and high-stress ER command spaces.
+                </p>
+                <span style={{ color: '#005aff', fontWeight: 'bold', cursor: 'pointer' }} onClick={onLaunchTerminal}>
+                  Launch Console Demo ➔
+                </span>
+              </div>
+
+              <div className="glass" style={{ padding: '30px', background: '#0a0d14', border: '1px solid rgba(255,255,255,0.06)' }}>
+                <div style={{ fontSize: '32px', marginBottom: '20px' }}>🔑</div>
+                <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', marginBottom: '12px' }}>Aegis Anywhere</h3>
+                <p style={{ color: '#888', fontSize: '13px', lineHeight: '1.6', marginBottom: '20px' }}>
+                  Secure connection from home laptops or regional devices. Log in via biometric verification using your physical B-Unit device.
+                </p>
+                <span style={{ color: '#005aff', fontWeight: 'bold', cursor: 'pointer' }} onClick={onLaunchTerminal}>
+                  Simulate B-Unit Login ➔
+                </span>
+              </div>
+
+              <div className="glass" style={{ padding: '30px', background: '#0a0d14', border: '1px solid rgba(255,255,255,0.06)' }}>
+                <div style={{ fontSize: '32px', marginBottom: '20px' }}>📱</div>
+                <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', marginBottom: '12px' }}>Aegis Mobile Alert</h3>
+                <p style={{ color: '#888', fontSize: '13px', lineHeight: '1.6', marginBottom: '20px' }}>
+                  Keep track of critical ICU patient alerts and secure clinical chats on the go. Full HIPAA-compliant iOS & Android mobile companion apps.
+                </p>
+                <span style={{ color: '#005aff', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => alert('Download link requested.')}>
+                  Request Mobile Link ➔
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* RESOURCES SECTION */}
+        {activeSection === 'resources' && (
+          <div>
+            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#fff', marginBottom: '16px' }}>
+              Terminal Resources & Guidelines
+            </h2>
+            <p style={{ color: '#aaa', fontSize: '15px', lineHeight: '1.6', marginBottom: '32px', maxWidth: '800px' }}>
+              Access downloadable user guides, mnemonic reference keys, API specification standards, and operator training documents.
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+              {[
+                { title: 'Aegis Terminal Fact Sheet', type: 'PDF Document (2.4 MB)', desc: 'General product specifications, hardware compatibility list, and system requirement details.' },
+                { title: 'Clinical Mnemonic Command Directory', type: 'Excel Spreadsheet (1.1 MB)', desc: 'Complete list of mnemonic command strings (DASH, PAT, CHAT, FDA, NEWS, EPIDEMIC) and shortcut keys.' },
+                { title: 'HL7 & FHIR API Integration Protocol', type: 'PDF Document (4.8 MB)', desc: 'Standard operating protocols for mapping hospital EHR systems to the Aegis vital feed stream.' },
+                { title: 'Certified Clinical Terminal Operator Syllabus', type: 'PDF Document (1.9 MB)', desc: 'Training guides, simulation tasks, and certification details for clinical coordinators.' }
+              ].map((res, i) => (
+                <div key={i} className="glass" style={{
+                  padding: '24px',
+                  background: '#0a0d14',
+                  border: '1px solid rgba(255,255,255,0.05)',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}>
+                  <div>
+                    <span style={{ fontSize: '10px', color: 'var(--accent-gold)', fontWeight: 'bold', textTransform: 'uppercase' }}>{res.type}</span>
+                    <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', margin: '6px 0' }}>{res.title}</h3>
+                    <p style={{ color: '#888', fontSize: '12px', lineHeight: '1.4' }}>{res.desc}</p>
+                  </div>
+                  <button
+                    onClick={() => alert(`Initiating download for ${res.title}...`)}
+                    style={{
+                      background: 'none',
+                      border: '1px solid #333',
+                      borderRadius: '50%',
+                      width: '40px',
+                      height: '40px',
+                      color: '#fff',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                      marginLeft: '20px'
+                    }}
+                  >
+                    📥
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+      </div>
+
+      {/* Bottom CTA Card */}
+      <section style={{ backgroundColor: '#000', borderTop: '1px solid #111', padding: '80px 24px' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'center' }}>
+          <div className="glass" style={{ width: '900px', padding: '50px', textAlign: 'center', background: 'linear-gradient(180deg, #11141c 0%, #080a0f 100%)', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <h3 style={{ fontSize: '28px', fontWeight: '800', color: '#fff', marginBottom: '16px' }}>
+              Full Integration inside Aegis Terminal
+            </h3>
+            <p style={{ color: '#aaa', fontSize: '14px', lineHeight: '1.6', marginBottom: '32px', maxWidth: '600px', margin: '0 auto 32px auto' }}>
+              This capability is fully synchronized inside the Aegis Terminal workspace. Enter the biometrically secured command console to test clinical news wires, outbreak tracking maps, and live SSE ECG monitors.
+            </p>
+            <button className="btn-primary" onClick={onLaunchTerminal} style={{ backgroundColor: '#005aff', padding: '14px 36px', fontSize: '14px', fontWeight: 'bold' }}>
+              Launch Full Terminal Workspace
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 function SubpageView({ pageId, onLaunchTerminal, onBack }) {
+  if (pageId === 'aegis-terminal' || pageId === 'terminal-overview') {
+    return <TerminalSubpageView onLaunchTerminal={onLaunchTerminal} onBack={onBack} />;
+  }
+
   const config = SUBPAGES_CONFIG[pageId] || {
     title: "Services Detail",
     subtitle: "Aegis Health Professional Services clinical databases and pipelines.",
