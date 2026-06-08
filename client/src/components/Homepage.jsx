@@ -18,8 +18,74 @@ export default function Homepage({ onLaunchTerminal }) {
   const [activeMenu, setActiveMenu] = useState(null); // 'products' | 'solutions' | 'insights' | null
   const [carouselIndex, setCarouselIndex] = useState(0);
   
-  // Tab Navigation: 'home' | 'insights'
-  const [currentTab, setCurrentTab] = useState('home');
+  // Tab Navigation: 'home' | 'insights' | subpages
+  const [currentTab, setCurrentTab] = useState(() => {
+    const path = window.location.pathname;
+    if (path === '/' || path === '') return 'home';
+    if (path === '/insights' || path === '/insights/') return 'insights';
+    if (path === '/products/bloomberg-terminal' || path === '/products/bloomberg-terminal/' || path === '/products/aegis-terminal' || path === '/products/aegis-terminal/') {
+      return 'aegis-terminal';
+    }
+    if (path.startsWith('/products/')) {
+      const parts = path.split('/');
+      const prod = parts[2];
+      if (PRODUCT_PAGES.includes(prod)) return prod;
+    }
+    if (path.startsWith('/solutions/')) {
+      const parts = path.split('/');
+      const sol = parts[2];
+      if (SOLUTION_PAGES.includes(sol)) return sol;
+    }
+    return 'home';
+  });
+
+  const getPathFromTab = (tab) => {
+    if (tab === 'home') return '/';
+    if (tab === 'insights') return '/insights/';
+    if (tab === 'aegis-terminal' || tab === 'terminal-overview') return '/products/bloomberg-terminal/';
+    if (PRODUCT_PAGES.includes(tab)) return `/products/${tab}/`;
+    if (SOLUTION_PAGES.includes(tab)) return `/solutions/${tab}/`;
+    return '/';
+  };
+
+  const getTabFromPath = (path) => {
+    if (path === '/' || path === '') return 'home';
+    if (path === '/insights' || path === '/insights/') return 'insights';
+    if (path === '/products/bloomberg-terminal' || path === '/products/bloomberg-terminal/' || path === '/products/aegis-terminal' || path === '/products/aegis-terminal/') {
+      return 'aegis-terminal';
+    }
+    if (path.startsWith('/products/')) {
+      const parts = path.split('/');
+      const prod = parts[2];
+      if (PRODUCT_PAGES.includes(prod)) return prod;
+    }
+    if (path.startsWith('/solutions/')) {
+      const parts = path.split('/');
+      const sol = parts[2];
+      if (SOLUTION_PAGES.includes(sol)) return sol;
+    }
+    return 'home';
+  };
+
+  useEffect(() => {
+    const handlePopState = (event) => {
+      const state = event.state;
+      if (state && state.tab) {
+        setCurrentTab(state.tab);
+      } else {
+        setCurrentTab(getTabFromPath(window.location.pathname));
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  useEffect(() => {
+    const targetPath = getPathFromTab(currentTab);
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({ tab: currentTab }, '', targetPath);
+    }
+  }, [currentTab]);
 
   // Insights Page States
   const [searchQuery, setSearchQuery] = useState('');
