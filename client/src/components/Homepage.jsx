@@ -1993,446 +1993,1062 @@ function SubpageWidget({ type }) {
   return <DefaultGaugeWidget />;
 }
 
+function DualMonitorSvg() {
+  return (
+    <svg viewBox="0 0 800 400" style={{ width: '100%', height: 'auto', display: 'block', maxWidth: '650px', margin: '0 auto' }}>
+      {/* Stand */}
+      <rect x="385" y="280" width="30" height="90" fill="#222" rx="5" />
+      <ellipse cx="400" cy="370" rx="90" ry="15" fill="#111" />
+      <path d="M 320 280 L 480 280 L 400 320 Z" fill="#1b1b1b" />
+      
+      {/* Left Monitor Frame */}
+      <rect x="60" y="40" width="330" height="230" fill="#0c0d12" rx="10" stroke="#333" strokeWidth="3" />
+      {/* Screen Left */}
+      <rect x="70" y="50" width="310" height="210" fill="#040507" rx="6" />
+      {/* Grid lines for chart */}
+      <path d="M 70 85 H 380 M 70 120 H 380 M 70 155 H 380 M 70 190 H 380" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5" />
+      <path d="M 120 50 V 260 M 180 50 V 260 M 240 50 V 260 M 300 50 V 260" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5" />
+      
+      {/* Financial Line Charts */}
+      {/* Yellow Trend Line */}
+      <path d="M 70 180 L 110 160 L 140 175 L 180 140 L 220 150 L 260 110 L 300 125 L 340 95 L 380 75" fill="none" stroke="#ffb000" strokeWidth="2" />
+      {/* Green Trend Line */}
+      <path d="M 70 210 L 110 185 L 150 195 L 190 150 L 230 165 L 270 120 L 310 110 L 350 85 L 380 60" fill="none" stroke="#00ff66" strokeWidth="1.5" />
+      {/* Red Drop Line */}
+      <path d="M 70 120 L 120 135 L 170 110 L 220 145 L 270 160 L 320 190 L 380 215" fill="none" stroke="#ff3b30" strokeWidth="1.5" strokeDasharray="3 3" />
+      
+      {/* Header labels */}
+      <text x="80" y="68" fill="#ffb000" fontSize="8" fontFamily="monospace" fontWeight="bold">GP &lt;GO&gt; - MULTI-ASSET RATIO</text>
+      <text x="250" y="68" fill="#00ff66" fontSize="8" fontFamily="monospace" fontWeight="bold">SPX: 5,123.45</text>
+      <text x="80" y="245" fill="#aaa" fontSize="7" fontFamily="monospace">Range: 1 Year  |  Currency: USD</text>
+
+      {/* Right Monitor Frame */}
+      <rect x="410" y="40" width="330" height="230" fill="#0c0d12" rx="10" stroke="#333" strokeWidth="3" />
+      {/* Screen Right */}
+      <rect x="420" y="50" width="310" height="210" fill="#040507" rx="6" />
+      
+      {/* Launchpad Layout - Window 1: Candlesticks (Left Half) */}
+      <rect x="425" y="55" width="145" height="110" fill="#080a0f" stroke="#222" strokeWidth="1" />
+      <text x="430" y="65" fill="#00e5ff" fontSize="7" fontFamily="monospace" fontWeight="bold">AAPL Equity - Candlesticks</text>
+      {/* Grid lines inside candlestick window */}
+      <line x1="425" y1="90" x2="570" y2="90" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
+      <line x1="425" y1="120" x2="570" y2="120" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
+      {/* Candlesticks: green / red bars with wicks */}
+      {/* Bar 1: Green */}
+      <line x1="440" y1="110" x2="440" y2="140" stroke="#00ff66" strokeWidth="1" />
+      <rect x="437" y="115" width="6" height="18" fill="#00ff66" />
+      {/* Bar 2: Red */}
+      <line x1="460" y1="100" x2="460" y2="135" stroke="#ff3b30" strokeWidth="1" />
+      <rect x="457" y="105" width="6" height="20" fill="#ff3b30" />
+      {/* Bar 3: Green */}
+      <line x1="480" y1="85" x2="480" y2="115" stroke="#00ff66" strokeWidth="1" />
+      <rect x="477" y="90" width="6" height="20" fill="#00ff66" />
+      {/* Bar 4: Green */}
+      <line x1="500" y1="75" x2="500" y2="105" stroke="#00ff66" strokeWidth="1" />
+      <rect x="497" y="80" width="6" height="18" fill="#00ff66" />
+      {/* Bar 5: Red */}
+      <line x1="520" y1="90" x2="520" y2="120" stroke="#ff3b30" strokeWidth="1" />
+      <rect x="517" y="95" width="6" height="15" fill="#ff3b30" />
+      {/* Bar 6: Green */}
+      <line x1="540" y1="70" x2="540" y2="100" stroke="#00ff66" strokeWidth="1" />
+      <rect x="537" y="73" width="6" height="20" fill="#00ff66" />
+
+      {/* Launchpad Layout - Window 2: Tickers List (Right Half Top) */}
+      <rect x="575" y="55" width="150" height="110" fill="#080a0f" stroke="#222" strokeWidth="1" />
+      <text x="580" y="65" fill="#ffb000" fontSize="7" fontFamily="monospace" fontWeight="bold">WATCHLIST - INDICES</text>
+      
+      <text x="580" y="80" fill="#fff" fontSize="6" fontFamily="monospace">COMP Index</text>
+      <text x="650" y="80" fill="#00ff66" fontSize="6" fontFamily="monospace">16,420.10</text>
+      <text x="700" y="80" fill="#00ff66" fontSize="6" fontFamily="monospace">+1.4%</text>
+
+      <text x="580" y="95" fill="#fff" fontSize="6" fontFamily="monospace">INDU Index</text>
+      <text x="650" y="95" fill="#ff3b30" fontSize="6" fontFamily="monospace">38,820.50</text>
+      <text x="700" y="95" fill="#ff3b30" fontSize="6" fontFamily="monospace">-0.2%</text>
+
+      <text x="580" y="110" fill="#fff" fontSize="6" fontFamily="monospace">EURUSD Curncy</text>
+      <text x="650" y="110" fill="#00ff66" fontSize="6" fontFamily="monospace">1.0842</text>
+      <text x="700" y="110" fill="#00ff66" fontSize="6" fontFamily="monospace">+0.1%</text>
+
+      <text x="580" y="125" fill="#fff" fontSize="6" fontFamily="monospace">GC1 Comdty</text>
+      <text x="650" y="125" fill="#00ff66" fontSize="6" fontFamily="monospace">2,345.80</text>
+      <text x="700" y="125" fill="#00ff66" fontSize="6" fontFamily="monospace">+0.8%</text>
+
+      <text x="580" y="140" fill="#fff" fontSize="6" fontFamily="monospace">CL1 Comdty</text>
+      <text x="650" y="140" fill="#ff3b30" fontSize="6" fontFamily="monospace">78.20</text>
+      <text x="700" y="140" fill="#ff3b30" fontSize="6" fontFamily="monospace">-0.9%</text>
+
+      {/* Launchpad Layout - Window 3: News Feed (Bottom Full Width) */}
+      <rect x="425" y="170" width="300" height="80" fill="#080a0f" stroke="#222" strokeWidth="1" />
+      <text x="430" y="180" fill="#ffb000" fontSize="7" fontFamily="monospace" fontWeight="bold">NSE &lt;GO&gt; - REAL-TIME BLOOMBERG WIRE</text>
+      
+      <text x="430" y="195" fill="#00ff66" fontSize="6" fontFamily="monospace">10:44</text>
+      <text x="460" y="195" fill="#fff" fontSize="6" fontFamily="monospace">FED KEEPS TARGET RATE RANGE UNCHANGED AT 5.25%-5.50%</text>
+
+      <text x="430" y="210" fill="#00ff66" fontSize="6" fontFamily="monospace">10:42</text>
+      <text x="460" y="210" fill="#fff" fontSize="6" fontFamily="monospace">US STOCK INDEX FUTURES RALLY POST-FED POLICY RELEASE</text>
+
+      <text x="430" y="225" fill="#00ff66" fontSize="6" fontFamily="monospace">10:40</text>
+      <text x="460" y="225" fill="#aaa" fontSize="6" fontFamily="monospace">ECB OFFICIALS MULL ADDITIONAL 25BPS RATE CUT IN JUNE</text>
+
+      <text x="430" y="240" fill="#00ff66" fontSize="6" fontFamily="monospace">10:39</text>
+      <text x="460" y="240" fill="#aaa" fontSize="6" fontFamily="monospace">CRUDE OIL FUTURES STABILIZE ON MIDDLE EAST SUPPLY TALKS</text>
+    </svg>
+  );
+}
+
+function MiniScreenMockup({ feature }) {
+  return (
+    <div style={{ background: '#000', border: '1px solid #333', borderRadius: '4px', padding: '12px', height: '100px', width: '130px', fontFamily: 'monospace', fontSize: '6px', color: '#00ff66', overflow: 'hidden' }}>
+      <div style={{ borderBottom: '1px solid #222', paddingBottom: '3px', marginBottom: '6px', display: 'flex', justifyContent: 'space-between', color: '#ffb000' }}>
+        <span>BPS::{feature.toUpperCase()}</span>
+        <span>OK</span>
+      </div>
+      {(feature === 'research' || feature === 'Clinical Research') && (
+        <div>
+          <div style={{ color: '#aaa', fontSize: '5px' }}>ANALYST RECOMMENDATIONS:</div>
+          <div style={{ color: '#fff', marginTop: '2px' }}>• AAPL: BUY [Target $210]</div>
+          <div style={{ color: '#ff3b30' }}>• TSLA: SELL [Target $180]</div>
+          <div style={{ color: '#00e5ff' }}>• MSFT: HOLD [Target $460]</div>
+        </div>
+      )}
+      {(feature === 'vitals' || feature === 'news' || feature === 'Real-Time Vitals') && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+          <div style={{ color: '#aaa', fontSize: '5px' }}>MARKET HEADLINES:</div>
+          <div style={{ color: '#fff' }}>• FED KEEPS RATES STABLE</div>
+          <div style={{ color: '#00e5ff' }}>• TOKYO SHARES ADVANCE</div>
+          <div style={{ color: '#ff3b30' }}>• BRENT SLIPS TO $78.20</div>
+        </div>
+      )}
+      {(feature === 'access' || feature === 'Remote Access') && (
+        <div style={{ textAlign: 'center', paddingTop: '6px' }}>
+          <div style={{ width: '22px', height: '22px', borderRadius: '50%', border: '1.5px solid #00ff66', margin: '0 auto 4px auto', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '8px' }}>🔑</div>
+          <div style={{ color: '#00ff66', fontSize: '5px' }}>B-UNIT PASS ACTIVE</div>
+          <div style={{ color: '#fff', fontSize: '6px' }}>[ 8 4 9 2 0 1 ]</div>
+        </div>
+      )}
+      {(feature === 'charts' || feature === 'Telemetry Charts') && (
+        <div style={{ display: 'flex', alignItems: 'flex-end', gap: '3px', height: '50px', paddingTop: '10px' }}>
+          <div style={{ width: '8px', height: '20px', background: '#00ff66' }} />
+          <div style={{ width: '8px', height: '12px', background: '#ff3b30' }} />
+          <div style={{ width: '8px', height: '35px', background: '#00ff66' }} />
+          <div style={{ width: '8px', height: '15px', background: '#ff3b30' }} />
+          <div style={{ width: '8px', height: '42px', background: '#00ff66' }} />
+        </div>
+      )}
+      {(feature === 'chat' || feature === 'Care Collaboration') && (
+        <div>
+          <div style={{ color: '#ffb000', fontSize: '5px' }}>IB CHAT WORKSPACE:</div>
+          <div style={{ color: '#fff', marginTop: '2px' }}>Vance: Check execution.</div>
+          <div style={{ color: '#00ff66' }}>You: Block order done.</div>
+          <div style={{ color: '#555', marginTop: '3px' }}>Press &lt;GO&gt; to send</div>
+        </div>
+      )}
+      {(feature === 'education' || feature === 'Operator Education') && (
+        <div>
+          <div style={{ color: '#aaa', fontSize: '5px' }}>BMC CERTIFICATIONS:</div>
+          <div style={{ color: '#fff', marginTop: '2px' }}>1. Econ Indicators [100%]</div>
+          <div style={{ color: '#fff' }}>2. Equities Module [100%]</div>
+          <div style={{ color: '#00e5ff' }}>3. FX Trading [In Progress]</div>
+        </div>
+      )}
+      {(feature === 'portfolio' || feature === 'Outcome Analytics') && (
+        <div>
+          <div style={{ color: '#aaa', fontSize: '5px' }}>PORTFOLIO METRICS:</div>
+          <div style={{ color: '#fff', marginTop: '2px' }}>Total Return: +14.2%</div>
+          <div style={{ color: '#00ff66' }}>S&P Benchmark: +12.1%</div>
+          <div style={{ color: '#ffb000' }}>Active Alpha: +2.1%</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function TerminalSubpageView({ onLaunchTerminal, onBack }) {
-  const [activeSection, setActiveSection] = useState('overview'); // 'overview', 'features', 'access', 'resources'
+  const [activeSection, setActiveSection] = useState('overview'); // 'overview', 'products', 'terminal-in-action', 'challenges', 'insights'
   const [activeFeature, setActiveFeature] = useState('dash'); // 'dash', 'pat', 'epidemic', 'fda', 'chat'
+  
+  // Demo request form state
+  const [businessSituation, setBusinessSituation] = useState('');
+  const [usedBloomberg, setUsedBloomberg] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneCode, setPhoneCode] = useState('US');
+  const [phone, setPhone] = useState('');
+  const [company, setCompany] = useState('');
+  const [city, setCity] = useState('');
+  const [jobRole, setJobRole] = useState('');
+  const [companyType, setCompanyType] = useState('');
+  const [country, setCountry] = useState('');
+  
+  const [formSubmitting, setFormSubmitting] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formError, setFormError] = useState('');
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (!firstName || !lastName || !email || !phone || !company || !city || !jobRole || !companyType || !country) {
+      setFormError('Please fill out all required fields.');
+      return;
+    }
+    setFormError('');
+    setFormSubmitting(true);
+    
+    // Simulate submission lag
+    setTimeout(() => {
+      setFormSubmitting(false);
+      setFormSubmitted(true);
+    }, 1500);
+  };
+
+  const scrollToRequestForm = () => {
+    const el = document.getElementById('request-demo-section');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div style={{ backgroundColor: '#000000', color: '#ffffff', minHeight: '80vh', fontFamily: "'Inter', sans-serif" }}>
-      {/* Subpage Hero */}
+      
+      {/* Subpage Hero with Bloomberg Gold/Orange Glow */}
       <section style={{
-        background: 'radial-gradient(circle at top, #0f2c25 0%, #000000 80%)',
-        padding: '80px 24px',
+        background: 'linear-gradient(105deg, #000000 45%, #cc8e08 100%)',
+        padding: '90px 24px',
         borderBottom: '1px solid #111',
         position: 'relative',
         overflow: 'hidden'
       }}>
         <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '60px', alignItems: 'center' }}>
           <div>
-            <span style={{ color: 'var(--accent-gold)', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px', letterSpacing: '1px', display: 'block', marginBottom: '16px' }}>
-              Aegis Professional Services
+            <span style={{ color: '#ff9900', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '13px', letterSpacing: '1.5px', display: 'block', marginBottom: '16px' }}>
+              Bloomberg Terminal
             </span>
-            <h1 style={{ fontSize: '48px', fontWeight: '800', color: '#ffffff', lineHeight: '1.2', marginBottom: '24px' }}>
-              Aegis Terminal
+            <h1 style={{ fontSize: '48px', fontWeight: '800', color: '#ffffff', lineHeight: '1.15', marginBottom: '24px', letterSpacing: '-0.5px' }}>
+              The financial world in full focus built on next-gen technology
             </h1>
-            <p style={{ fontSize: '18px', color: '#cccccc', lineHeight: '1.6', marginBottom: '36px', maxWidth: '650px' }}>
-              The premier platform for clinical decision-makers who require real-time patient telemetry, global disease intelligence, and secure clinical collaboration.
+            <p style={{ fontSize: '18px', color: '#dddddd', lineHeight: '1.6', marginBottom: '36px', maxWidth: '650px' }}>
+              Power your decision-making with best-in-class data, news, research, analytics and access to a global community - all from one fully integrated solution.
             </p>
             <div style={{ display: 'flex', gap: '16px' }}>
-              <button className="btn-primary" onClick={onLaunchTerminal} style={{ backgroundColor: '#005aff', color: '#fff', border: 'none', padding: '14px 28px', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer' }}>
-                Launch Aegis Terminal Demo
-              </button>
-              <button className="btn-secondary" onClick={onBack} style={{ border: '1px solid #444', color: '#fff', padding: '13px 27px', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer', background: 'transparent' }}>
-                Back to Services Directory
+              <button className="btn-primary" onClick={scrollToRequestForm} style={{ backgroundColor: '#005aff', color: '#fff', border: 'none', padding: '16px 36px', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer' }}>
+                Request a Demo
               </button>
             </div>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', opacity: 0.8 }}>
-            <svg viewBox="0 0 100 100" style={{ width: '160px', height: '160px' }}>
-              <circle cx="50" cy="50" r="45" fill="none" stroke="#222" strokeWidth="1" />
-              <circle cx="50" cy="50" r="30" fill="none" stroke="#333" strokeWidth="1" strokeDasharray="3,3" />
-              <path d="M 50 5 L 50 95 M 5 50 L 95 50" stroke="#222" strokeWidth="1" />
-              <circle cx="50" cy="50" r="45" fill="none" stroke="var(--accent-gold)" strokeWidth="1.5" strokeDasharray="10 30" style={{ transformOrigin: '50px 50px' }} />
-            </svg>
+          
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <DualMonitorSvg />
           </div>
         </div>
       </section>
 
-      {/* Anchor Navigation Bar */}
+      {/* Anchor Navigation Bar - White Background & Black Text (Exactly matching Bloomberg layout) */}
       <div style={{ 
         position: 'sticky', 
-        top: '70px', 
+        top: '80px', 
         zIndex: 90, 
-        backgroundColor: '#090a0f', 
-        borderBottom: '1px solid #222', 
+        backgroundColor: '#ffffff', 
+        borderBottom: '1px solid #e0e0e0', 
         padding: '0 24px' 
       }}>
-        <div className="container" style={{ display: 'flex', gap: '40px' }}>
-          {['overview', 'features', 'access', 'resources'].map((tab) => (
+        <div className="container" style={{ display: 'flex', gap: '30px' }}>
+          {[
+            { id: 'overview', label: 'Overview' },
+            { id: 'products', label: 'Products' },
+            { id: 'terminal-in-action', label: 'Terminal in Action' },
+            { id: 'challenges', label: 'Top Industry Challenges' },
+            { id: 'insights', label: 'Insights' }
+          ].map((tab) => (
             <button
-              key={tab}
-              onClick={() => setActiveSection(tab)}
+              key={tab.id}
+              onClick={() => setActiveSection(tab.id)}
               style={{
                 background: 'none',
                 border: 'none',
-                borderBottom: activeSection === tab ? '2px solid var(--accent-gold)' : '2px solid transparent',
-                color: activeSection === tab ? 'var(--accent-gold)' : '#aaaaaa',
+                borderBottom: activeSection === tab.id ? '3px solid #000000' : '3px solid transparent',
+                color: activeSection === tab.id ? '#000000' : '#555555',
                 padding: '16px 0',
-                fontSize: '14px',
+                fontSize: '13px',
                 fontWeight: 'bold',
                 cursor: 'pointer',
-                textTransform: 'uppercase',
-                letterSpacing: '0.5px',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.15s ease'
               }}
             >
-              {tab}
+              {tab.label}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Section Content */}
-      <div className="container" style={{ padding: '60px 24px' }}>
-        
-        {/* OVERVIEW SECTION */}
-        {activeSection === 'overview' && (
-          <div>
-            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#fff', marginBottom: '16px' }}>
-              The clinical ecosystem in a single workspace.
-            </h2>
-            <p style={{ color: '#aaa', fontSize: '15px', lineHeight: '1.6', marginBottom: '40px', maxWidth: '800px' }}>
-              The Aegis Terminal connects healthcare institutions, clinical laboratories, ER triage networks, and drug regulatory workflows into a low-latency, secure monospaced command center. Empowering physicians to act faster and base bedside decisions on real-time streaming vitals.
-            </p>
+      {/* CONTENT PANEL - Crisp White Background for Subpage Content (Bloomberg Style) */}
+      <div style={{ backgroundColor: '#ffffff', color: '#111111', padding: '60px 0', minHeight: '500px' }}>
+        <div className="container" style={{ padding: '0 24px' }}>
+          
+          {/* OVERVIEW TAB CONTENT */}
+          {activeSection === 'overview' && (
+            <div>
+              <p style={{ fontSize: '17px', lineHeight: '1.7', color: '#333333', maxWidth: '1000px', marginBottom: '50px' }}>
+                The Bloomberg Terminal revolutionized an industry by bringing transparency to financial markets. More than four decades on, it remains at the cutting edge of innovation and information delivery - with fast access to news, data, unique insight and trading tools helping leading decision makers turn knowledge into action.
+              </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', marginBottom: '60px' }}>
-              <div className="glass" style={{ padding: '24px', border: '1px solid rgba(255,255,255,0.05)', background: '#0a0d14' }}>
-                <div style={{ color: 'var(--accent-gold)', fontSize: '24px', marginBottom: '16px' }}>🕸️</div>
-                <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '8px' }}>The Clinical Network</h3>
-                <p style={{ color: '#888', fontSize: '12px', lineHeight: '1.5' }}>Instant messaging consultation channels connecting on-duty specialists, cardiologists, and emergency practitioners.</p>
-              </div>
-              <div className="glass" style={{ padding: '24px', border: '1px solid rgba(255,255,255,0.05)', background: '#0a0d14' }}>
-                <div style={{ color: 'var(--accent-gold)', fontSize: '24px', marginBottom: '16px' }}>📈</div>
-                <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '8px' }}>Live Telemetry Feeds</h3>
-                <p style={{ color: '#888', fontSize: '12px', lineHeight: '1.5' }}>Bedside monitors broadcast patient ECG waves and SpO2 indicators directly into multi-screen terminal panels.</p>
-              </div>
-              <div className="glass" style={{ padding: '24px', border: '1px solid rgba(255,255,255,0.05)', background: '#0a0d14' }}>
-                <div style={{ color: 'var(--accent-gold)', fontSize: '24px', marginBottom: '16px' }}>🧬</div>
-                <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '8px' }}>EHR & Lab Databases</h3>
-                <p style={{ color: '#888', fontSize: '12px', lineHeight: '1.5' }}>Integrates with HL7/FHIR server APIs for zero-delay patient file lookups, genome mapping, and lab orders.</p>
-              </div>
-              <div className="glass" style={{ padding: '24px', border: '1px solid rgba(255,255,255,0.05)', background: '#0a0d14' }}>
-                <div style={{ color: 'var(--accent-gold)', fontSize: '24px', marginBottom: '16px' }}>🛡️</div>
-                <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '8px' }}>FDA Priority Audit</h3>
-                <p style={{ color: '#888', fontSize: '12px', lineHeight: '1.5' }}>Streamlined filing logs, clinical study tracking dashboards, and regulatory priority approval indexes.</p>
-              </div>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px', borderTop: '1px solid #222', paddingTop: '40px', textAlign: 'center' }}>
-              <div>
-                <div style={{ fontSize: '48px', fontWeight: '800', color: '#fff', fontFamily: 'monospace' }}>350,000+</div>
-                <div style={{ fontSize: '11px', color: '#888', textTransform: 'uppercase', marginTop: '8px', fontWeight: 'bold' }}>Active Clinical Operators</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '48px', fontWeight: '800', color: '#fff', fontFamily: 'monospace' }}>&lt; 2ms</div>
-                <div style={{ fontSize: '11px', color: '#888', textTransform: 'uppercase', marginTop: '8px', fontWeight: 'bold' }}>Average Telemetry Latency</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '48px', fontWeight: '800', color: '#fff', fontFamily: 'monospace' }}>99.999%</div>
-                <div style={{ fontSize: '11px', color: '#888', textTransform: 'uppercase', marginTop: '8px', fontWeight: 'bold' }}>Active Service Uptime</div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* FEATURES SECTION */}
-        {activeSection === 'features' && (
-          <div>
-            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#fff', marginBottom: '16px' }}>
-              Core Command Features
-            </h2>
-            <p style={{ color: '#aaa', fontSize: '15px', lineHeight: '1.6', marginBottom: '32px', maxWidth: '800px' }}>
-              Select a command code from the left sidebar to preview the monospaced panel screens executing on the Aegis Terminal in real-time.
-            </p>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '40px' }}>
-              {/* Feature Selection Sidebar */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {[
-                  { id: 'dash', label: 'DASH <GO>', desc: 'Clinic status & overall ICU load charts.' },
-                  { id: 'pat', label: 'PATIENT [ID] <GO>', desc: 'Bedside streaming ECG & patient stats.' },
-                  { id: 'epidemic', label: 'EPIDEMIC <GO>', desc: 'Surveillance outbreak alert mapping.' },
-                  { id: 'fda', label: 'FDA <GO>', desc: 'Clinical trial molecular class log.' },
-                  { id: 'chat', label: 'CHAT <GO>', desc: 'Specialist message consult loop.' }
-                ].map((f) => (
-                  <div
-                    key={f.id}
-                    onClick={() => setActiveFeature(f.id)}
-                    style={{
-                      padding: '16px',
-                      borderRadius: '8px',
-                      background: activeFeature === f.id ? 'rgba(0, 90, 255, 0.1)' : '#0a0d14',
-                      border: activeFeature === f.id ? '1px solid #005aff' : '1px solid rgba(255,255,255,0.04)',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s ease'
-                    }}
-                  >
-                    <div style={{ fontWeight: 'bold', fontSize: '14px', color: activeFeature === f.id ? '#00e5ff' : '#fff', fontFamily: 'monospace' }}>
-                      {f.label}
-                    </div>
-                    <div style={{ fontSize: '11px', color: '#888', marginTop: '6px' }}>
-                      {f.desc}
-                    </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
+                {/* 4 Benefit Cards matching Screenshot 2 */}
+                <div style={{ padding: '30px 24px', backgroundColor: '#f4f6f9', border: '1px solid #e1e4e8', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div style={{ color: '#005aff' }}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                      <line x1="8" y1="21" x2="16" y2="21" />
+                      <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
                   </div>
-                ))}
-              </div>
-
-              {/* Terminal Workspace Mock Display */}
-              <div className="glass" style={{
-                background: '#040507',
-                border: '1.5px solid #00ff66',
-                boxShadow: '0 0 20px rgba(0, 255, 102, 0.1)',
-                borderRadius: '8px',
-                padding: '24px',
-                minHeight: '340px',
-                fontFamily: 'monospace',
-                fontSize: '12px',
-                position: 'relative'
-              }}>
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  borderBottom: '1px solid #222',
-                  paddingBottom: '8px',
-                  marginBottom: '16px',
-                  fontSize: '10px',
-                  color: '#00ff66'
-                }}>
-                  <span>AEGIS HEALTH TERMINAL - SCREEN PREVIEW</span>
-                  <span>SYS.OK</span>
+                  <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#111' }}>Extensive coverage</h3>
+                  <p style={{ color: '#555', fontSize: '13px', lineHeight: '1.6' }}>The Terminal provides coverage of markets, industries, companies & securities across all asset classes.</p>
                 </div>
 
-                {activeFeature === 'dash' && (
-                  <div style={{ color: '#00ff66' }}>
-                    <div style={{ color: '#fff', fontWeight: 'bold', marginBottom: '12px' }}>DASHBOARD CLINICAL INDEXES:</div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '8px', borderBottom: '1px solid #333', paddingBottom: '6px', marginBottom: '8px', color: '#888' }}>
-                      <span>INDEX</span>
-                      <span>VALUE</span>
-                      <span>TREND</span>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '8px', margin: '4px 0' }}>
-                      <span>AEGIS BIOTECH INDEX</span>
-                      <span style={{ color: '#fff' }}>3,842.10</span>
-                      <span style={{ color: '#00ff66' }}>+1.12% ▲</span>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '8px', margin: '4px 0' }}>
-                      <span>CDC EPIDEMIC LEVEL</span>
-                      <span style={{ color: '#fff' }}>4.8</span>
-                      <span style={{ color: '#00ff66' }}>+3.23% ▲</span>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '8px', margin: '4px 0' }}>
-                      <span>US HOSP TRIAGE TIME</span>
-                      <span style={{ color: '#fff' }}>144 min</span>
-                      <span style={{ color: '#ff3b30' }}>+9.09% ▲</span>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '8px', margin: '4px 0' }}>
-                      <span>FDA DRUG APPR RATE</span>
-                      <span style={{ color: '#fff' }}>88%</span>
-                      <span style={{ color: '#888' }}>0.00% ─</span>
-                    </div>
+                <div style={{ padding: '30px 24px', backgroundColor: '#f4f6f9', border: '1px solid #e1e4e8', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div style={{ color: '#005aff' }}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="18" y1="20" x2="18" y2="10" />
+                      <line x1="12" y1="20" x2="12" y2="4" />
+                      <line x1="6" y1="20" x2="6" y2="14" />
+                    </svg>
                   </div>
-                )}
+                  <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#111' }}>Powerful data & analytics</h3>
+                  <p style={{ color: '#555', fontSize: '13px', lineHeight: '1.6' }}>Tap into data, proprietary and third-party research & analytics.</p>
+                </div>
 
-                {activeFeature === 'pat' && (
-                  <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', color: '#fff', marginBottom: '12px' }}>
-                      <span>PATIENT 102: JANE SMITH</span>
-                      <span style={{ color: '#00e5ff' }}>ROOM ER-B2</span>
-                    </div>
-                    <EkgMiniCanvas />
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginTop: '16px', color: '#00ff66', textAlign: 'center' }}>
-                      <div style={{ border: '1px solid #222', padding: '6px', borderRadius: '4px' }}>
-                        <div style={{ fontSize: '8px', color: '#888' }}>HR</div>
-                        <div style={{ fontSize: '14px', fontWeight: 'bold', color: '#ff3b30' }}>104 bpm</div>
-                      </div>
-                      <div style={{ border: '1px solid #222', padding: '6px', borderRadius: '4px' }}>
-                        <div style={{ fontSize: '8px', color: '#888' }}>SpO2</div>
-                        <div style={{ fontSize: '14px', fontWeight: 'bold', color: '#00e5ff' }}>91% ⚠️</div>
-                      </div>
-                      <div style={{ border: '1px solid #222', padding: '6px', borderRadius: '4px' }}>
-                        <div style={{ fontSize: '8px', color: '#888' }}>BP</div>
-                        <div style={{ fontSize: '14px', fontWeight: 'bold', color: '#fff' }}>118/75</div>
-                      </div>
-                      <div style={{ border: '1px solid #222', padding: '6px', borderRadius: '4px' }}>
-                        <div style={{ fontSize: '8px', color: '#888' }}>RR</div>
-                        <div style={{ fontSize: '14px', fontWeight: 'bold', color: '#ff9900' }}>24 bpm</div>
-                      </div>
-                    </div>
+                <div style={{ padding: '30px 24px', backgroundColor: '#f4f6f9', border: '1px solid #e1e4e8', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div style={{ color: '#005aff' }}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
                   </div>
-                )}
+                  <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#111' }}>Industry-leading collaboration tools</h3>
+                  <p style={{ color: '#555', fontSize: '13px', lineHeight: '1.6' }}>Collaborate across your firm and with a global network of more than 350,000 influential decision makers.</p>
+                </div>
 
-                {activeFeature === 'epidemic' && (
-                  <div style={{ color: '#ff9900' }}>
-                    <div style={{ color: '#fff', fontWeight: 'bold', marginBottom: '12px' }}>CDC PATHOGEN ALERT WIRE:</div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                      <div style={{ borderLeft: '3px solid #ff3b30', paddingLeft: '10px', margin: '4px 0' }}>
-                        <div style={{ fontSize: '10px', color: '#888' }}>09:12 - REGIONAL ALERT</div>
-                        <div style={{ color: '#ff3b30', fontWeight: 'bold' }}>H5N1 AVIAN FLU CLUSTER DETECTED</div>
-                        <div style={{ color: '#aaa', fontSize: '11px' }}>Local R0 value rises to 1.45 in poultry farms; priority sequence tests underway.</div>
-                      </div>
-                      <div style={{ borderLeft: '3px solid #ff9900', paddingLeft: '10px', margin: '4px 0' }}>
-                        <div style={{ fontSize: '10px', color: '#888' }}>08:44 - VOLATILITY WARNING</div>
-                        <div style={{ color: '#ff9900', fontWeight: 'bold' }}>ER WAIT TIMES UP 12% IN DISTRICT 4</div>
-                        <div style={{ color: '#aaa', fontSize: '11px' }}>Staffing shortages in radiology units cause bed allocation bottlenecking.</div>
-                      </div>
-                    </div>
+                <div style={{ padding: '30px 24px', backgroundColor: '#f4f6f9', border: '1px solid #e1e4e8', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div style={{ color: '#005aff' }}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                    </svg>
                   </div>
-                )}
-
-                {activeFeature === 'fda' && (
-                  <div style={{ color: '#00e5ff' }}>
-                    <div style={{ color: '#fff', fontWeight: 'bold', marginBottom: '12px' }}>FDA INVESTIGATIONAL DRUG PIPELINE:</div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                      <div style={{ background: '#0a0d14', border: '1px solid #222', padding: '10px', borderRadius: '4px' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>
-                          <span>Memorall (Mem104)</span>
-                          <span style={{ color: '#00ff66' }}>Phase III</span>
-                        </div>
-                        <div style={{ color: '#aaa', fontSize: '11px', marginTop: '4px' }}>Sponsor: Aegis BioLabs | Efficacy: 78% amyloid plaque reduction.</div>
-                      </div>
-                      <div style={{ background: '#0a0d14', border: '1px solid #222', padding: '10px', borderRadius: '4px' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>
-                          <span>CardioShield (CS-9)</span>
-                          <span style={{ color: '#ffb000' }}>Phase II</span>
-                        </div>
-                        <div style={{ color: '#aaa', fontSize: '11px', marginTop: '4px' }}>Sponsor: NovaTherapeutics | Efficacy: 18% LVEF increase.</div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {activeFeature === 'chat' && (
-                  <div style={{ display: 'flex', flexDirection: 'column', height: '260px', justifyContent: 'space-between' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', overflowY: 'auto', paddingRight: '4px' }}>
-                      <div style={{ alignSelf: 'flex-start', background: '#11141c', border: '1px solid #333', padding: '8px 12px', borderRadius: '6px', maxWidth: '85%' }}>
-                        <div style={{ fontSize: '9px', color: '#ffb000', marginBottom: '2px' }}>Dr. John Carter (ER Chief)</div>
-                        <div style={{ color: '#fff' }}>Do you have the latest panel results on patient Jane Smith? Her vitals seem unstable.</div>
-                      </div>
-                      <div style={{ alignSelf: 'flex-end', background: '#0a1d10', border: '1px solid #00ff66', padding: '8px 12px', borderRadius: '6px', maxWidth: '85%' }}>
-                        <div style={{ fontSize: '9px', color: '#00ff66', marginBottom: '2px' }}>You</div>
-                        <div style={{ color: '#fff' }}>Yes, her SpO2 is 91% and RR is 24. Initiated nebulized albuterol.</div>
-                      </div>
-                    </div>
-                    <div style={{ borderTop: '1px solid #222', paddingTop: '10px', color: '#666' }}>
-                      Type message prompt and press &lt;GO&gt; to send...
-                    </div>
-                  </div>
-                )}
+                  <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#111' }}>Multi-asset execution</h3>
+                  <p style={{ color: '#555', fontSize: '13px', lineHeight: '1.6' }}>Create more efficient workflows with integrated execution & order management solutions and sophisticated pre- and post-trade analytics.</p>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* ACCESS SECTION */}
-        {activeSection === 'access' && (
-          <div>
-            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#fff', marginBottom: '16px' }}>
-              Access Aegis Terminal Everywhere
-            </h2>
-            <p style={{ color: '#aaa', fontSize: '15px', lineHeight: '1.6', marginBottom: '40px', maxWidth: '800px' }}>
-              Clinicians require secure, low-latency access to telemetry feeds, whether at the bedside, in the hospital workspace, or responding to regional calls from remote home networks.
-            </p>
+          {/* PRODUCTS TAB CONTENT */}
+          {activeSection === 'products' && (
+            <div>
+              <h2 style={{ fontSize: '26px', fontWeight: '800', textAlign: 'center', marginBottom: '40px', color: '#111' }}>
+                A Bloomberg Terminal subscription includes the most powerful, flexible tools for financial professionals.
+              </h2>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px', marginBottom: '40px' }}>
-              <div className="glass" style={{ padding: '30px', background: '#0a0d14', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <div style={{ fontSize: '32px', marginBottom: '20px' }}>🖥️</div>
-                <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', marginBottom: '12px' }}>Aegis Desktop App</h3>
-                <p style={{ color: '#888', fontSize: '13px', lineHeight: '1.6', marginBottom: '20px' }}>
-                  The full dual-monitor clinical terminal interface, optimized for ICU dashboard hubs and high-stress ER command spaces.
-                </p>
-                <span style={{ color: '#005aff', fontWeight: 'bold', cursor: 'pointer' }} onClick={onLaunchTerminal}>
-                  Launch Console Demo ➔
-                </span>
-              </div>
+              {/* Grid Layout mimicking Screenshot 3 */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
+                
+                <div style={{ backgroundColor: '#000', color: '#fff', borderRadius: '8px', padding: '24px', height: '170px', display: 'flex', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 2 }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 'bold' }}>Research</h3>
+                    <span style={{ fontSize: '16px' }}>→</span>
+                  </div>
+                  <div style={{ position: 'absolute', right: '-20px', bottom: '-10px', transform: 'rotate(-10deg)', opacity: 0.7 }}>
+                    <MiniScreenMockup feature="research" />
+                  </div>
+                </div>
 
-              <div className="glass" style={{ padding: '30px', background: '#0a0d14', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <div style={{ fontSize: '32px', marginBottom: '20px' }}>🔑</div>
-                <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', marginBottom: '12px' }}>Aegis Anywhere</h3>
-                <p style={{ color: '#888', fontSize: '13px', lineHeight: '1.6', marginBottom: '20px' }}>
-                  Secure connection from home laptops or regional devices. Log in via biometric verification using your physical B-Unit device.
-                </p>
-                <span style={{ color: '#005aff', fontWeight: 'bold', cursor: 'pointer' }} onClick={onLaunchTerminal}>
-                  Simulate B-Unit Login ➔
-                </span>
-              </div>
+                <div style={{ backgroundColor: '#000', color: '#fff', borderRadius: '8px', padding: '24px', height: '170px', display: 'flex', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 2 }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 'bold' }}>News</h3>
+                    <span style={{ fontSize: '16px' }}>→</span>
+                  </div>
+                  <div style={{ position: 'absolute', right: '-20px', bottom: '-10px', transform: 'rotate(-10deg)', opacity: 0.7 }}>
+                    <MiniScreenMockup feature="news" />
+                  </div>
+                </div>
 
-              <div className="glass" style={{ padding: '30px', background: '#0a0d14', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <div style={{ fontSize: '32px', marginBottom: '20px' }}>📱</div>
-                <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', marginBottom: '12px' }}>Aegis Mobile Alert</h3>
-                <p style={{ color: '#888', fontSize: '13px', lineHeight: '1.6', marginBottom: '20px' }}>
-                  Keep track of critical ICU patient alerts and secure clinical chats on the go. Full HIPAA-compliant iOS & Android mobile companion apps.
-                </p>
-                <span style={{ color: '#005aff', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => alert('Download link requested.')}>
-                  Request Mobile Link ➔
-                </span>
+                <div style={{ backgroundColor: '#000', color: '#fff', borderRadius: '8px', padding: '24px', height: '170px', display: 'flex', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 2 }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 'bold' }}>Access</h3>
+                    <span style={{ fontSize: '16px' }}>→</span>
+                  </div>
+                  <div style={{ position: 'absolute', right: '-20px', bottom: '-10px', transform: 'rotate(-10deg)', opacity: 0.7 }}>
+                    <MiniScreenMockup feature="access" />
+                  </div>
+                </div>
+
+                <div style={{ backgroundColor: '#000', color: '#fff', borderRadius: '8px', padding: '24px', height: '170px', display: 'flex', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 2 }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 'bold' }}>Charts</h3>
+                    <span style={{ fontSize: '16px' }}>→</span>
+                  </div>
+                  <div style={{ position: 'absolute', right: '-20px', bottom: '-10px', transform: 'rotate(-10deg)', opacity: 0.7 }}>
+                    <MiniScreenMockup feature="charts" />
+                  </div>
+                </div>
+
+                <div style={{ backgroundColor: '#000', color: '#fff', borderRadius: '8px', padding: '24px', height: '170px', display: 'flex', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 2 }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 'bold' }}>Collaboration Tools</h3>
+                    <span style={{ fontSize: '16px' }}>→</span>
+                  </div>
+                  <div style={{ position: 'absolute', right: '-20px', bottom: '-10px', transform: 'rotate(-10deg)', opacity: 0.7 }}>
+                    <MiniScreenMockup feature="chat" />
+                  </div>
+                </div>
+
+                <div style={{ backgroundColor: '#000', color: '#fff', borderRadius: '8px', padding: '24px', height: '170px', display: 'flex', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 2 }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 'bold' }}>Education</h3>
+                    <span style={{ fontSize: '16px' }}>→</span>
+                  </div>
+                  <div style={{ position: 'absolute', right: '-20px', bottom: '-10px', transform: 'rotate(-10deg)', opacity: 0.7 }}>
+                    <MiniScreenMockup feature="education" />
+                  </div>
+                </div>
+
+                <div style={{ backgroundColor: '#000', color: '#fff', borderRadius: '8px', padding: '24px', height: '170px', display: 'flex', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 2 }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 'bold' }}>Portfolio Analytics</h3>
+                    <span style={{ fontSize: '16px' }}>→</span>
+                  </div>
+                  <div style={{ position: 'absolute', right: '-20px', bottom: '-10px', transform: 'rotate(-10deg)', opacity: 0.7 }}>
+                    <MiniScreenMockup feature="portfolio" />
+                  </div>
+                </div>
+
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* RESOURCES SECTION */}
-        {activeSection === 'resources' && (
-          <div>
-            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#fff', marginBottom: '16px' }}>
-              Terminal Resources & Guidelines
-            </h2>
-            <p style={{ color: '#aaa', fontSize: '15px', lineHeight: '1.6', marginBottom: '32px', maxWidth: '800px' }}>
-              Access downloadable user guides, mnemonic reference keys, API specification standards, and operator training documents.
-            </p>
+          {/* TERMINAL IN ACTION TAB CONTENT */}
+          {activeSection === 'terminal-in-action' && (
+            <div>
+              <h2 style={{ fontSize: '28px', fontWeight: '800', textAlign: 'center', color: '#111' }}>
+                Go further with the Bloomberg Terminal.
+              </h2>
+              <p style={{ fontSize: '14px', color: '#666', textAlign: 'center', marginBottom: '60px' }}>
+                Highlights of the Terminal in action.
+              </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-              {[
-                { title: 'Aegis Terminal Fact Sheet', type: 'PDF Document (2.4 MB)', desc: 'General product specifications, hardware compatibility list, and system requirement details.' },
-                { title: 'Clinical Mnemonic Command Directory', type: 'Excel Spreadsheet (1.1 MB)', desc: 'Complete list of mnemonic command strings (DASH, PAT, CHAT, FDA, NEWS, EPIDEMIC) and shortcut keys.' },
-                { title: 'HL7 & FHIR API Integration Protocol', type: 'PDF Document (4.8 MB)', desc: 'Standard operating protocols for mapping hospital EHR systems to the Aegis vital feed stream.' },
-                { title: 'Certified Clinical Terminal Operator Syllabus', type: 'PDF Document (1.9 MB)', desc: 'Training guides, simulation tasks, and certification details for clinical coordinators.' }
-              ].map((res, i) => (
-                <div key={i} className="glass" style={{
-                  padding: '24px',
-                  background: '#0a0d14',
-                  border: '1px solid rgba(255,255,255,0.05)',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '80px' }}>
+                
+                {/* Row 1: Left Text, Right Mockup */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
                   <div>
-                    <span style={{ fontSize: '10px', color: 'var(--accent-gold)', fontWeight: 'bold', textTransform: 'uppercase' }}>{res.type}</span>
-                    <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', margin: '6px 0' }}>{res.title}</h3>
-                    <p style={{ color: '#888', fontSize: '12px', lineHeight: '1.4' }}>{res.desc}</p>
+                    <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#111', marginBottom: '16px' }}>Research at your fingertips.</h3>
+                    <p style={{ color: '#555', fontSize: '14px', lineHeight: '1.6' }}>
+                      Bloomberg Intelligence provides interactive data and exclusive outlooks by industry and region from a team of more than 350 research professionals.
+                    </p>
                   </div>
-                  <button
-                    onClick={() => alert(`Initiating download for ${res.title}...`)}
-                    style={{
-                      background: 'none',
-                      border: '1px solid #333',
-                      borderRadius: '50%',
-                      width: '40px',
-                      height: '40px',
-                      color: '#fff',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                      marginLeft: '20px'
-                    }}
-                  >
-                    📥
+                  <div style={{ background: 'linear-gradient(135deg, #ffb000 0%, #ff5a00 100%)', padding: '24px', borderRadius: '8px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
+                    <div style={{ background: '#000', border: '1px solid #333', borderRadius: '4px', padding: '16px', height: '200px', fontFamily: 'monospace', color: '#00ff66', fontSize: '10px' }}>
+                      <div style={{ borderBottom: '1px solid #222', paddingBottom: '6px', marginBottom: '10px', color: '#ffb000' }}>BI &lt;GO&gt; - BLOOMBERG INTELLIGENCE</div>
+                      <div>• EQUITIES OVERVIEW: HEALTHY RALLY DETECTED</div>
+                      <div>• SECTOR SUMMARY: TECH LEADERS GAIN GROUND</div>
+                      <div>• INFLATION GAUGES: EXPECTED CUT STABLE</div>
+                      <div style={{ marginTop: '20px', color: '#aaa' }}>Querying analyst reports register...</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Row 2: Right Text, Left Mockup */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
+                  <div style={{ background: 'linear-gradient(135deg, #ffb000 0%, #ff5a00 100%)', padding: '24px', borderRadius: '8px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
+                    <div style={{ background: '#000', border: '1px solid #333', borderRadius: '4px', padding: '16px', height: '200px', fontFamily: 'monospace', color: '#00ff66', fontSize: '10px' }}>
+                      <div style={{ borderBottom: '1px solid #222', paddingBottom: '6px', marginBottom: '10px', color: '#ffb000' }}>NEWS ANALYTICS</div>
+                      <div style={{ color: '#00e5ff' }}>SENTIMENT SCORING SUMMARY: COMP INDEX</div>
+                      <div style={{ marginTop: '10px' }}>• BULLISH HEADLINES: 78% (HIGH INDEX)</div>
+                      <div style={{ color: '#ff3b30' }}>• BEARISH INDICATORS: 12% (LOW INDEX)</div>
+                      <div style={{ color: '#aaa', marginTop: '20px' }}>Social volume ticker active...</div>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#111', marginBottom: '16px' }}>News analytics that tell a bigger story.</h3>
+                    <p style={{ color: '#555', fontSize: '14px', lineHeight: '1.6' }}>
+                      It's more than being the leading and largest provider of financial and business news. See which companies people are reading about the most.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Row 3: Left Text, Right Mockup */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
+                  <div>
+                    <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#111', marginBottom: '16px' }}>Make instant connections.</h3>
+                    <p style={{ color: '#555', fontSize: '14px', lineHeight: '1.6' }}>
+                      Anyone who's anyone in financial services connects with clients, counterparties and colleagues on Instant Bloomberg. The Terminal delivers access that no one else can from your desktop and mobile devices.
+                    </p>
+                  </div>
+                  <div style={{ background: 'linear-gradient(135deg, #ffb000 0%, #ff5a00 100%)', padding: '24px', borderRadius: '8px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
+                    <div style={{ background: '#000', border: '1px solid #333', borderRadius: '4px', padding: '16px', height: '200px', fontFamily: 'monospace', color: '#fff', fontSize: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <div>
+                        <div style={{ color: '#ffb000', marginBottom: '2px' }}>IB &lt;GO&gt; - INSTANT BLOOMBERG</div>
+                        <div style={{ color: '#aaa' }}>Vance: Executing buy order for COMP block index.</div>
+                        <div style={{ color: '#00ff66', marginTop: '6px' }}>You: Confirmed, routing order via execute panel.</div>
+                      </div>
+                      <div style={{ borderTop: '1px solid #222', paddingTop: '6px', color: '#555' }}>
+                        Type message &lt;GO&gt;
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Row 4: Right Text, Left Mockup */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
+                  <div style={{ background: 'linear-gradient(135deg, #ffb000 0%, #ff5a00 100%)', padding: '24px', borderRadius: '8px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
+                    <div style={{ background: '#000', border: '1px solid #333', borderRadius: '4px', padding: '16px', height: '200px', fontFamily: 'monospace', color: '#00ff66', fontSize: '10px' }}>
+                      <div style={{ borderBottom: '1px solid #222', paddingBottom: '6px', marginBottom: '10px', color: '#ffb000' }}>BLOOMBERG LAUNCHPAD</div>
+                      <div>[DASH] S&P ACTIVE WATCH: +1.12% [STABLE]</div>
+                      <div>[WIRE] EURUSD RATE LEVEL: 1.0842 [OK]</div>
+                      <div>[PORT] ALPHA INDEX RATING: +2.1% [ACTIVE]</div>
+                      <div style={{ marginTop: '20px', width: '100%', height: '40px', border: '1.5px dashed #00e5ff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#00e5ff' }}>
+                        DRAG & DROP MODULES
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#111', marginBottom: '16px' }}>Make fast decisions with a customized workspace.</h3>
+                    <p style={{ color: '#555', fontSize: '14px', lineHeight: '1.6' }}>
+                      Bloomberg Launchpad delivers dynamic multi-asset class security monitors, powerful alerting tools, sophisticated charting and news that moves markets.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Row 5: Left Text, Right Mockup */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
+                  <div>
+                    <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#111', marginBottom: '16px' }}>Never miss a beat.</h3>
+                    <p style={{ color: '#555', fontSize: '14px', lineHeight: '1.6' }}>
+                      Access your Bloomberg Terminal account right on your mobile devices whether you're in between meetings, in transit or simply on the go.
+                    </p>
+                  </div>
+                  <div style={{ background: 'linear-gradient(135deg, #ffb000 0%, #ff5a00 100%)', padding: '24px', borderRadius: '8px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
+                    <div style={{ background: '#000', border: '1px solid #333', borderRadius: '4px', padding: '16px', height: '200px', fontFamily: 'monospace', color: '#fff', fontSize: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <div>
+                        <div style={{ color: '#ffb000', borderBottom: '1px solid #222', paddingBottom: '3px', marginBottom: '6px' }}>BLOOMBERG PROFESSIONAL APP</div>
+                        <div>MOBILE PIN CODE: [ ACTIVE ]</div>
+                        <div style={{ color: '#00ff66', marginTop: '10px' }}>• SECURITIES ACCESS GRANTED</div>
+                        <div style={{ color: '#aaa' }}>• SYNCED DEVICE: PORTABLE 1</div>
+                      </div>
+                      <div style={{ textAlign: 'center', color: '#555' }}>
+                        Connected to secure network
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Terminal Essentials Section (Screenshot 2) */}
+              <div style={{ 
+                marginTop: '100px',
+                background: 'linear-gradient(135deg, #0e0e0e 0%, #3a2802 100%)', 
+                borderRadius: '8px', 
+                padding: '60px 48px',
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '40px',
+                alignItems: 'center'
+              }}>
+                <div>
+                  <h3 style={{ color: '#ff9900', fontSize: '12px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '10px' }}>Terminal Essentials</h3>
+                  <h2 style={{ color: '#ffffff', fontSize: '32px', fontWeight: '800', marginBottom: '20px' }}>Watch what a Bloomberg Terminal can do for you.</h2>
+                  <p style={{ color: '#cccccc', fontSize: '14px', lineHeight: '1.6', marginBottom: '30px', maxWidth: '450px' }}>
+                    Terminal Essentials breaks down quick and useful ways to use the Bloomberg Terminal so that new users can confidently navigate one of the world's most powerful financial tools.
+                  </p>
+                  <button onClick={onLaunchTerminal} style={{ backgroundColor: '#005aff', color: '#ffffff', border: 'none', padding: '12px 28px', borderRadius: '4px', fontWeight: 'bold', fontSize: '13px', cursor: 'pointer' }}>
+                    More Terminal Essentials
                   </button>
                 </div>
-              ))}
-            </div>
-          </div>
-        )}
+                
+                {/* SVG Video Preview Mockup with Presenter */}
+                <div style={{ position: 'relative', width: '100%', height: '240px', background: '#222', borderRadius: '6px', overflow: 'hidden', border: '1px solid #444' }}>
+                  {/* Presenter Silhouette & Terminal setup graphics */}
+                  <svg viewBox="0 0 400 240" style={{ width: '100%', height: '100%', display: 'block' }}>
+                    <defs>
+                      <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#1a1a1a" />
+                        <stop offset="100%" stopColor="#ffaa00" stopOpacity="0.25" />
+                      </linearGradient>
+                    </defs>
+                    {/* Background glow */}
+                    <rect width="400" height="240" fill="url(#glow)" />
+                    {/* Desk & Dual Monitors silhouette */}
+                    <rect x="50" y="140" width="300" height="80" fill="#151515" />
+                    <rect x="80" y="80" width="110" height="70" fill="#0c0d12" stroke="#333" strokeWidth="1.5" />
+                    <rect x="200" y="80" width="110" height="70" fill="#0c0d12" stroke="#333" strokeWidth="1.5" />
+                    <rect x="130" y="150" width="10" height="30" fill="#333" />
+                    <rect x="250" y="150" width="10" height="30" fill="#333" />
+                    {/* Charts on monitors */}
+                    <path d="M 90 120 L 120 100 L 150 130 L 180 90" fill="none" stroke="#ffb000" strokeWidth="1" />
+                    <path d="M 210 110 L 240 130 L 270 95 L 300 115" fill="none" stroke="#00ff66" strokeWidth="1" />
+                    {/* Presenter drawing */}
+                    {/* Body */}
+                    <path d="M 170 240 C 170 180, 230 180, 230 240 Z" fill="#292d35" />
+                    {/* Head */}
+                    <circle cx="200" cy="165" r="20" fill="#e0ac93" />
+                    {/* Hair */}
+                    <path d="M 180 165 C 180 145, 220 145, 220 165 C 220 155, 180 155, 180 165 Z" fill="#4a3728" />
+                  </svg>
+                  {/* Glass Play Overlay */}
+                  <div style={{ 
+                    position: 'absolute', 
+                    top: 0, left: 0, right: 0, bottom: 0, 
+                    backgroundColor: 'rgba(0,0,0,0.4)', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    cursor: 'pointer'
+                  }} onClick={onLaunchTerminal}>
+                    <div style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.9)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="#000" style={{ marginLeft: '4px' }}>
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
 
+              </div>
+            </div>
+          )}
+
+          {/* TOP INDUSTRY CHALLENGES TAB CONTENT */}
+          {activeSection === 'challenges' && (
+            <div>
+              <h2 style={{ fontSize: '26px', fontWeight: '800', textAlign: 'center', marginBottom: '40px', color: '#111' }}>
+                Top industry challenges and what our customers are saying about how Bloomberg helps.
+              </h2>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px', textAlign: 'center', marginBottom: '40px' }}>
+                <div>
+                  <div style={{ fontSize: '64px', fontWeight: '800', color: '#005aff', fontFamily: 'monospace' }}>97%</div>
+                  <div style={{ fontSize: '13px', color: '#333', marginTop: '12px', lineHeight: '1.5', padding: '0 20px' }}>
+                    of customers say Bloomberg delivers access to high-quality data.
+                  </div>
+                </div>
+                <div style={{ borderLeft: '1px solid #e1e4e8' }}>
+                  <div style={{ fontSize: '64px', fontWeight: '800', color: '#005aff', fontFamily: 'monospace' }}>91%</div>
+                  <div style={{ fontSize: '13px', color: '#333', marginTop: '12px', lineHeight: '1.5', padding: '0 20px' }}>
+                    of customers say Bloomberg delivers the right tech for their jobs.
+                  </div>
+                </div>
+                <div style={{ borderLeft: '1px solid #e1e4e8' }}>
+                  <div style={{ fontSize: '64px', fontWeight: '800', color: '#005aff', fontFamily: 'monospace' }}>88%</div>
+                  <div style={{ fontSize: '13px', color: '#333', marginTop: '12px', lineHeight: '1.5', padding: '0 20px' }}>
+                    of customers turn to Bloomberg for research to make informed decisions.
+                  </div>
+                </div>
+              </div>
+              
+              <div style={{ textAlign: 'center', fontSize: '11px', color: '#888', marginBottom: '60px' }}>
+                Source: 2024 Bloomberg customer survey
+              </div>
+
+              {/* Interstitial Contact Card (Screenshot 4) */}
+              <div style={{ 
+                backgroundColor: '#000000', 
+                borderRadius: '8px', 
+                padding: '40px 60px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                {/* Background Tilted Terminal Screen Graphic */}
+                <div style={{ position: 'absolute', right: '-40px', top: '-10px', width: '220px', height: '160px', opacity: 0.15, transform: 'rotate(-15deg)' }}>
+                  <MiniScreenMockup feature="charts" />
+                </div>
+
+                <h2 style={{ fontSize: '24px', fontWeight: '800', color: '#ffffff', maxWidth: '600px', lineHeight: '1.4', zIndex: 2 }}>
+                  Have more questions about Terminal access? Our Terminal Support team is here to help.
+                </h2>
+                <button 
+                  onClick={scrollToRequestForm}
+                  style={{ 
+                    width: '48px', 
+                    height: '48px', 
+                    borderRadius: '50%', 
+                    backgroundColor: 'rgba(255,255,255,0.1)', 
+                    border: '1px solid rgba(255,255,255,0.3)',
+                    color: '#fff',
+                    fontSize: '20px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 2,
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.2)'}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+                >
+                  →
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* INSIGHTS TAB CONTENT (Scraped Articles from Screenshot 5) */}
+          {activeSection === 'insights' && (
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+                <h2 style={{ fontSize: '26px', fontWeight: '800', color: '#111', margin: 0 }}>
+                  Research & Insights
+                </h2>
+                <a href="/insights/" onClick={(e) => { e.preventDefault(); alert('Redirecting to full Bloomberg Insights catalog...'); }} style={{ color: '#005aff', fontWeight: 'bold', fontSize: '13px', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  View all Insights ➔
+                </a>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '30px' }}>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#f4f6f9', border: '1px solid #e1e4e8', borderRadius: '8px', overflow: 'hidden' }}>
+                  <div style={{ height: '140px', background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {/* SVG graphic of line chart */}
+                    <svg viewBox="0 0 100 60" style={{ width: '80px', height: '50px' }}>
+                      <path d="M10 50 L 30 35 L 50 40 L 70 15 L 90 20" fill="none" stroke="#ff3b30" strokeWidth="2" />
+                      <circle cx="90" cy="20" r="3" fill="#ff3b30" />
+                    </svg>
+                  </div>
+                  <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                    <span style={{ color: '#005aff', fontSize: '10px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px', display: 'block' }}>ARTICLE | Regulation</span>
+                    <h3 style={{ fontSize: '15px', fontWeight: 'bold', color: '#111', margin: '0 0 12px 0', lineHeight: '1.4' }}>
+                      May 2026 Global Regulatory Brief: Risk, capital and financial stability (APRA operational...
+                    </h3>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#f4f6f9', border: '1px solid #e1e4e8', borderRadius: '8px', overflow: 'hidden' }}>
+                  <div style={{ height: '140px', background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {/* SVG graphic of bar chart */}
+                    <svg viewBox="0 0 100 60" style={{ width: '80px', height: '50px' }}>
+                      <rect x="20" y="30" width="10" height="20" fill="#ffb000" />
+                      <rect x="40" y="20" width="10" height="30" fill="#ffb000" />
+                      <rect x="60" y="10" width="10" height="40" fill="#00ff66" />
+                    </svg>
+                  </div>
+                  <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                    <span style={{ color: '#005aff', fontSize: '10px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px', display: 'block' }}>ARTICLE | Regulation</span>
+                    <h3 style={{ fontSize: '15px', fontWeight: 'bold', color: '#111', margin: '0 0 12px 0', lineHeight: '1.4' }}>
+                      May 2026 Global Regulatory Brief: Trading and markets (MiFIR market structure, SGX dual listin...
+                    </h3>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#f4f6f9', border: '1px solid #e1e4e8', borderRadius: '8px', overflow: 'hidden' }}>
+                  <div style={{ height: '140px', background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {/* SVG graphic of network cables */}
+                    <svg viewBox="0 0 100 60" style={{ width: '80px', height: '50px' }}>
+                      <path d="M 10 30 Q 30 10, 50 30 T 90 30" fill="none" stroke="#00e5ff" strokeWidth="1.5" />
+                      <path d="M 10 20 Q 30 40, 50 20 T 90 20" fill="none" stroke="#ffb000" strokeWidth="1.5" />
+                    </svg>
+                  </div>
+                  <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                    <span style={{ color: '#005aff', fontSize: '10px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px', display: 'block' }}>ARTICLE | Regulation</span>
+                    <h3 style={{ fontSize: '15px', fontWeight: 'bold', color: '#111', margin: '0 0 12px 0', lineHeight: '1.4' }}>
+                      May 2026 Global Regulatory Brief: Digital finance (Prediction markets, digital collateral and...
+                    </h3>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          )}
+
+        </div>
       </div>
 
-      {/* Bottom CTA Card */}
-      <section style={{ backgroundColor: '#000', borderTop: '1px solid #111', padding: '80px 24px' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'center' }}>
-          <div className="glass" style={{ width: '900px', padding: '50px', textAlign: 'center', background: 'linear-gradient(180deg, #11141c 0%, #080a0f 100%)', border: '1px solid rgba(255,255,255,0.05)' }}>
-            <h3 style={{ fontSize: '28px', fontWeight: '800', color: '#fff', marginBottom: '16px' }}>
-              Full Integration inside Aegis Terminal
-            </h3>
-            <p style={{ color: '#aaa', fontSize: '14px', lineHeight: '1.6', marginBottom: '32px', maxWidth: '600px', margin: '0 auto 32px auto' }}>
-              This capability is fully synchronized inside the Aegis Terminal workspace. Enter the biometrically secured command console to test clinical news wires, outbreak tracking maps, and live SSE ECG monitors.
-            </p>
-            <button className="btn-primary" onClick={onLaunchTerminal} style={{ backgroundColor: '#005aff', padding: '14px 36px', fontSize: '14px', fontWeight: 'bold' }}>
-              Launch Full Terminal Workspace
-            </button>
+      {/* REQUEST A DEMO / CONTACT US SECTION (Scraped Form layout from Screenshot 6) */}
+      <section id="request-demo-section" style={{ backgroundColor: '#ffffff', color: '#111111', borderTop: '1px solid #e0e0e0', padding: '90px 24px' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '60px' }}>
+          
+          {/* Left Column: Contact details */}
+          <div>
+            <h2 style={{ fontSize: '42px', fontWeight: '800', color: '#111', margin: '0 0 40px 0' }}>Contact us</h2>
+            
+            <div style={{ padding: '30px', backgroundColor: '#f4f6f9', borderRadius: '6px', border: '1px solid #e1e4e8', maxWidth: '420px' }}>
+              <span style={{ display: 'inline-block', backgroundColor: '#e2edff', color: '#005aff', fontWeight: 'bold', fontSize: '9px', letterSpacing: '0.5px', padding: '4px 8px', borderRadius: '3px', marginBottom: '16px' }}>HELP & SUPPORT</span>
+              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#111', margin: '0 0 10px 0' }}>Already a customer?</h3>
+              <p style={{ color: '#555', fontSize: '13px', lineHeight: '1.6', marginBottom: '20px' }}>
+                If you have queries regarding software installations, key replacements, or billing, connect with support.
+              </p>
+              <a 
+                href="/login/" 
+                onClick={(e) => { e.preventDefault(); onLaunchTerminal(); }} 
+                style={{ color: '#005aff', fontWeight: 'bold', fontSize: '13px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              >
+                Get in touch with the support team ➔
+              </a>
+            </div>
           </div>
+
+          {/* Right Column: Dynamic Form */}
+          <div style={{ padding: '10px 0' }}>
+            
+            {formSubmitted ? (
+              <div style={{ padding: '40px', backgroundColor: '#f4fffa', border: '1.5px solid #00c853', borderRadius: '6px', textAlign: 'center' }}>
+                <span style={{ fontSize: '48px', color: '#00c853', display: 'block', marginBottom: '16px' }}>✓</span>
+                <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#111', marginBottom: '10px' }}>Thank you, {firstName}!</h3>
+                <p style={{ color: '#333', fontSize: '14px', lineHeight: '1.6', marginBottom: '30px', maxWidth: '500px', margin: '0 auto 30px auto' }}>
+                  We have received your Bloomberg Terminal demo request. A specialist will contact you shortly at <strong>{email}</strong> to review your system requirements.
+                </p>
+                <div style={{ backgroundColor: '#ffffff', padding: '24px', borderRadius: '6px', border: '1px solid #d4ecd5', display: 'inline-block' }}>
+                  <p style={{ color: '#555', fontSize: '13px', margin: '0 0 16px 0' }}>
+                    In the meantime, you can launch our interactive monospaced Terminal simulator:
+                  </p>
+                  <button 
+                    onClick={onLaunchTerminal}
+                    style={{ backgroundColor: '#005aff', color: '#fff', border: 'none', padding: '14px 32px', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer' }}
+                  >
+                    Launch Terminal Simulator
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleFormSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#111', borderBottom: '1px solid #e0e0e0', paddingBottom: '12px', margin: 0 }}>
+                  Help us connect you to the right person
+                </h3>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <label style={{ fontSize: '13px', fontWeight: '600', color: '#333' }}>
+                    Please explain the business situation or problem you are trying to manage. *
+                  </label>
+                  <textarea 
+                    value={businessSituation}
+                    onChange={(e) => setBusinessSituation(e.target.value)}
+                    required
+                    rows="4" 
+                    placeholder="Provide details about your firm's asset management, data feeds, or trading workflow..."
+                    style={{ width: '100%', padding: '12px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: 'sans-serif' }}
+                  />
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <label style={{ fontSize: '13px', fontWeight: '600', color: '#333' }}>
+                    Have you ever used the Bloomberg Professional Service? *
+                  </label>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '13px' }}>
+                    {[
+                      { val: 'no', label: 'No' },
+                      { val: 'firm-customer', label: 'No, but my firm is a Bloomberg customer' },
+                      { val: 'yes-previous', label: 'Yes, I have used it previously' },
+                      { val: 'yes-current', label: 'Yes, I am currently a client' }
+                    ].map((opt) => (
+                      <label key={opt.val} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                        <input 
+                          type="radio" 
+                          name="usedBloomberg" 
+                          value={opt.val}
+                          checked={usedBloomberg === opt.val}
+                          onChange={(e) => setUsedBloomberg(e.target.value)}
+                          required
+                          style={{ cursor: 'pointer' }} 
+                        />
+                        {opt.label}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#111', borderBottom: '1px solid #e0e0e0', paddingBottom: '12px', marginTop: '16px', margin: 0 }}>
+                  Tell us about yourself
+                </h3>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>First name *</label>
+                    <input 
+                      type="text" 
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required 
+                      style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }} 
+                    />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Last name *</label>
+                    <input 
+                      type="text" 
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      required 
+                      style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }} 
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Business email *</label>
+                  <input 
+                    type="email" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required 
+                    style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }} 
+                  />
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Phone *</label>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <select 
+                      value={phoneCode}
+                      onChange={(e) => setPhoneCode(e.target.value)}
+                      style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc', width: '150px' }}
+                    >
+                      <option value="US">United States (+1)</option>
+                      <option value="UK">United Kingdom (+44)</option>
+                      <option value="IN">India (+91)</option>
+                      <option value="CA">Canada (+1)</option>
+                      <option value="DE">Germany (+49)</option>
+                    </select>
+                    <input 
+                      type="tel" 
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      required 
+                      placeholder="Phone number"
+                      style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc', flexGrow: 1 }} 
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Company *</label>
+                    <input 
+                      type="text" 
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                      required 
+                      style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }} 
+                    />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>City *</label>
+                    <input 
+                      type="text" 
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      required 
+                      style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }} 
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Job role *</label>
+                  <select 
+                    value={jobRole}
+                    onChange={(e) => setJobRole(e.target.value)}
+                    required
+                    style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }}
+                  >
+                    <option value="">Select one</option>
+                    <option value="Analyst">Analyst</option>
+                    <option value="Trader">Trader</option>
+                    <option value="Portfolio Manager">Portfolio Manager</option>
+                    <option value="Risk Manager">Risk Manager</option>
+                    <option value="CEO">Chief Executive Officer</option>
+                    <option value="Student">Student</option>
+                    <option value="Other">Other / Not Applicable</option>
+                  </select>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Company type *</label>
+                  <select 
+                    value={companyType}
+                    onChange={(e) => setCompanyType(e.target.value)}
+                    required
+                    style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }}
+                  >
+                    <option value="">Select one</option>
+                    <option value="Asset Management">Asset Management Firm</option>
+                    <option value="Broker Dealer">Broker Dealer</option>
+                    <option value="Corporation">Corporation (Non-Financial)</option>
+                    <option value="Commercial Bank">Commercial Bank</option>
+                    <option value="Hedge Fund">Hedge Fund</option>
+                    <option value="Private Equity">Private Equity / Venture Capital</option>
+                    <option value="RIA">RIA / Wealth Management</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#555' }}>Country or region *</label>
+                  <select 
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    required
+                    style={{ padding: '10px', fontSize: '13px', borderRadius: '4px', border: '1px solid #ccc' }}
+                  >
+                    <option value="">Select one</option>
+                    <option value="United States">United States</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="India">India</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Australia">Australia</option>
+                  </select>
+                </div>
+
+                {formError && (
+                  <div style={{ color: '#ff3b30', fontSize: '13px', fontWeight: 'bold' }}>
+                    {formError}
+                  </div>
+                )}
+
+                <button 
+                  type="submit" 
+                  disabled={formSubmitting}
+                  style={{ 
+                    backgroundColor: '#005aff', 
+                    color: '#ffffff', 
+                    border: 'none', 
+                    padding: '14px', 
+                    borderRadius: '4px', 
+                    fontWeight: 'bold', 
+                    fontSize: '14px', 
+                    cursor: formSubmitting ? 'not-allowed' : 'pointer',
+                    marginTop: '10px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '10px'
+                  }}
+                >
+                  {formSubmitting ? (
+                    <>
+                      <div style={{ width: '16px', height: '16px', border: '2px solid #fff', borderTop: '2px solid transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+                      Submitting Request...
+                    </>
+                  ) : 'Submit Request'}
+                </button>
+              </form>
+            )}
+
+          </div>
+
         </div>
       </section>
+      
+      {/* Keyframe spinner style hack */}
+      <style>{`
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   );
 }
