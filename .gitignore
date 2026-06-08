@@ -1,0 +1,20 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules/
+
+# Built assets
+dist/
+dist-ssr/
+build/
+
+# Local env files
+.env
+*.local
+
+# OS files
+.DS_Store
+Thumbs.db
